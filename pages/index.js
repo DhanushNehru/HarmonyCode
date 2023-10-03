@@ -31,36 +31,14 @@ const Home = () => {
 					content="https://harmonycode.vercep.app"
 				/>
 				<meta
-					property="og:image"
-					content="https://harmonycode.vercel.app/mockup.png"
-				/>
-				<meta
 					property="og:description"
 					content="Music for your coding"
 				/>
 				<meta property="og:site_name" content="harmonycode" />
 				<meta property="og:locale" content="en_US" />
 
-				{/* Twitter Meta Tags */}
-				<meta property="twitter:card" content="summary" />
-				<meta property="twitter:title" content="harmonycode" />
-				<meta
-					property="twitter:description"
-					content="Music for your coding"
-				/>
-				<meta
-					property="twitter:image"
-					content="https://harmonycode.vercel.app/mockup.png"
-				/>
-				<meta
-					property="twitter:image:alt"
-					content="harmonycode Home Page"
-				/>
-				<meta property="twitter:site" content="@Dhanush_Nehru" />
-				<meta property="twitter:creator" content="@Dhanush_Nehru" />
-
 				<title>
-					harmonycode - Music 🎵 to keep you on while coding 🧑‍💻
+					harmonycode - Music 🎶 for your coding 🧑‍💻
 				</title>
 
 				<link rel="icon" href="/favicon.webp" />
