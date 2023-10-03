@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
+import GoogleSignIn from "./GoogleSignIn";
 
 const Header = () => {
 	const [stars, setStars] = useState(0);
-
 	// Fetch the number of stargazers of the repository (harmonycode)
 	useEffect(() => {
 		const perPage = 100; // Number of repositories per page (maximum is often 100)
@@ -32,8 +32,10 @@ const Header = () => {
 					Harmony Code 🎶
 				</h1>
 			</div>
-
+			
 			<div className="flex items-center space-x-2">
+				{/* Google Login */}
+					<GoogleSignIn/>
 				{/* Github Card */}
 				<a
 					href="https://www.github.com/DhanushNehru"
