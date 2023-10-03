@@ -24,38 +24,80 @@
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Table of Contents
+
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Setting Up Firebase Environment Variables](#setting-up-firebase-environment-variables)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+- [Gitpod](#gitpod)
+
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+Before you begin, ensure you have met the following requirements:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Node.js: Make sure you have Node.js installed on your machine. You can download it from [nodejs.org](https://nodejs.org/).
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### Setting Up Firebase Environment Variables
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+To run this project, you need to set up environment variables for Firebase. These variables contain sensitive information and should not be hard-coded in your codebase. Follow these steps to set up the required environment variables:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+1. **Create a Firebase Project**:
+   - If you haven't already, create a Firebase project on the [Firebase Console](https://console.firebase.google.com/).
 
-## Learn More
+2. **Obtain Firebase Configuration**:
+   - In the Firebase Console, select your project.
+   - Go to Project settings (gear icon) > General.
+   - Under the "Your apps" section, select the web app you are using for this project.
+   - You will find the Firebase configuration object, which includes the following properties:
 
-To learn more about Next.js, take a look at the following resources:
+     - `apiKey`
+     - `authDomain`
+     - `projectId`
+     - `storageBucket`
+     - `messagingSenderId`
+     - `appId`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. **Set Up Environment Variables**:
+   - In your project directory, create a `.env.local` file (if it doesn't already exist).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+   - Add the following lines to the `.env.local` file:
 
-## Deploy on Vercel
+     ```env
+     NEXT_PUBLIC_API_KEY=<Your-API-Key>
+     NEXT_PUBLIC_AUTH_DOMAIN=<Your-Auth-Domain>
+     NEXT_PUBLIC_PROJECT_ID=<Your-Project-ID>
+     NEXT_PUBLIC_STORAGE_BUCKET=<Your-Storage-Bucket>
+     NEXT_PUBLIC_MESSAGING_SENDER_ID=<Your-Messaging-Sender-ID>
+     NEXT_PUBLIC_APP_ID=<Your-App-ID>
+     ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   Replace `<Your-API-Key>`, `<Your-Auth-Domain>`, etc., with the respective values you obtained from Firebase.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+   - Save the `.env.local` file.
+
+4. **Load Environment Variables**:
+   - Ensure that you have a method to load environment variables in your Next.js application. You can use packages like `dotenv` or Vercel's built-in support for environment variables.
+
+5. **Start Your Application**:
+   - You can now start your Next.js application. The Firebase configuration will be loaded from the environment variables you set up.
+
+## Usage
+
+Provide information on how to use your project once the environment variables are set up correctly.
+
+## Contributing
+
+Explain how others can contribute to your project. You can include guidelines for reporting issues, submitting pull requests, and coding standards.
+
+## License
+
+This project is licensed under the [License Name] - see the [LICENSE.md](LICENSE.md) file for details.
+ and contributions are welcome!
 
 ---
 
