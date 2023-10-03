@@ -1,19 +1,3 @@
-
-## Gitpod
-
-In the cloud-free development environment where you can directly start coding. 
-
-You can use Gitpod in the cloud [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/DhanushNehru/HarmonyCode) 
-
-This will automatically start live server in the browser.
-
-You can make changes and see how it behaves on the go without cloning the repo. 
-
----
-
-
-
-
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
@@ -48,3 +32,17 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+---
+
+
+## Gitpod
+
+In the cloud-free development environment where you can directly start coding. 
+
+You can use Gitpod in the cloud [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/DhanushNehru/HarmonyCode) 
+
+This will automatically start live server in the browser.
+
+You can make changes and see how it behaves on the go without cloning the repo. 
+
