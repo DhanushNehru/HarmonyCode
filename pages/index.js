@@ -38,7 +38,7 @@ const Home = () => {
 				<meta property="og:locale" content="en_US" />
 
 				<title>
-					harmonycode - Music 🎶 for your coding 🧑‍💻
+					Harmony Code 🎶 Music for your coding 🧑‍💻
 				</title>
 
 				<link rel="icon" href="/favicon.webp" />
