@@ -3,7 +3,9 @@ import {
 	FacebookShareButton, LinkedinIcon, LinkedinShareButton,
 	PinterestIcon,
 	PinterestShareButton, RedditIcon,
-	RedditShareButton, WhatsappIcon,
+	RedditShareButton, 
+	TwitterShareButton, TwitterIcon, 
+	WhatsappIcon,
 	WhatsappShareButton
 } from "next-share";
 
@@ -47,6 +49,10 @@ const Footer = () => {
 					url={'harmonycode.vercel.app/'} >
 					<LinkedinIcon size={32} round />
 				</LinkedinShareButton>
+				<TwitterShareButton
+					url={'harmonycode.vercel.app/'} >
+					<TwitterIcon size={32} round />
+				</TwitterShareButton>
 			</div>
 			</div>
 		</footer>

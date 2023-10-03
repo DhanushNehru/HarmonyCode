@@ -35,7 +35,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ---
 
-
 ## Gitpod
 
 In the cloud-free development environment where you can directly start coding. 
@@ -46,3 +45,9 @@ This will automatically start live server in the browser.
 
 You can make changes and see how it behaves on the go without cloning the repo. 
 
+## Acknowledgement
+Special thanks to all our contributors for helping make this app better. 🌟
+<br><br>
+   <p align="center">
+  <img src="https://contributors-img.web.app/image?repo=DhanushNehru/HarmonyCode" width = 500/>
+   </p>

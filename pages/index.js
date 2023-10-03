@@ -4,10 +4,12 @@ import Header from "../components/Header";
 import Cards from "../components/Cards";
 import Footer from "../components/Footer";
 import ThemeToggler from "../components/ThemeToggler";
+import { AuthProvider } from "../context/AuthContext";
 
 const Home = () => {
 	return (
 		<div>
+			<AuthProvider>
 			<Head>
 				{/* Required meta tags */}
 				<meta charset="UTF-8" />
@@ -51,6 +53,7 @@ const Home = () => {
 			<Footer />
 
 			<ThemeToggler />
+			</AuthProvider>
 		</div>
 	);
 };
