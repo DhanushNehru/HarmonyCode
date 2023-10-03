@@ -24,7 +24,7 @@ const Card = ({ title, Icon }) => {
 	}
 
 	return (
-		<div className={`relative bg-white p-4 rounded-2xl w-[240px] h-[220px] shadow-lg hover:shadow-2xl cursor-pointer transition-all duration-150 flex flex-col space-y-4 dark:bg-[#252424] ${isPlaying && 'border-4 border-blue-500'}`}>
+		<div className={`relative bg-white p-4 rounded-2xl w-[240px] h-[220px] shadow-lg hover:shadow-2xl hover:bg-gray-200 hover:translate-y-1 cursor-pointer transition-all duration-150 flex flex-col space-y-4 dark:bg-[#252424] hover:dark:bg-[black] ${isPlaying && 'border-4 border-blue-500'}`}>
 			<div onClick={startStopSound} className="h-full">
 				<h3 className="text-gray-500 dark:text-gray-200">{title}</h3>
 
