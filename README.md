@@ -1,3 +1,27 @@
+
+<h1 align='center'>HarmonyCode</h1>
+<div align="center">
+ <p>
+  
+[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
+![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)
+![Visitors](https://api.visitorbadge.io/api/visitors?path=DhanushNehru%2FHarmonyCode%20&countColor=%23263759&style=for-the-badge)
+![GitHub forks](https://img.shields.io/github/forks/DhanushNehru/HarmonyCode?style=for-the-badge)
+![GitHub Repo stars](https://img.shields.io/github/stars/DhanushNehru/HarmonyCode?style=for-the-badge)
+![GitHub contributors](https://img.shields.io/github/contributors/DhanushNehru/HarmonyCode?style=for-the-badge)
+![GitHub last commit](https://img.shields.io/github/last-commit/DhanushNehru/HarmonyCode?style=for-the-badge)
+![GitHub repo size](https://img.shields.io/github/repo-size/DhanushNehru/HarmonyCode?style=for-the-badge)
+![Github](https://img.shields.io/github/license/DhanushNehru/HarmonyCode?style=for-the-badge)
+![GitHub issues](https://img.shields.io/github/issues/DhanushNehru/HarmonyCode?style=for-the-badge)
+![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/DhanushNehru/HarmonyCode?style=for-the-badge)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/DhanushNehru/HarmonyCode?style=for-the-badge)
+![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/DhanushNehru/HarmonyCode?style=for-the-badge)
+  
+ </p>
+ </div>
+
+<h2 align='center'> Hacktoberfest Music for your coding 🎵</h2>
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
