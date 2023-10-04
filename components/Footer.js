@@ -57,7 +57,8 @@ const Footer = () => {
 						<LinkedinIcon size={32} round />
 					</LinkedinShareButton>
 					<TwitterShareButton
-						url={'harmonycode.vercel.app/'} >
+						url={'harmonycode.vercel.app/'} 
+						style={{ marginRight: '40px' }}>
 						<TwitterIcon size={32} round />
 					</TwitterShareButton>
 				</div>
