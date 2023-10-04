@@ -26,10 +26,10 @@ const Footer = () => {
 
 
 			<div className="flex gap-4  flex-wrap">
-				<a href="#"><AiFillGithub size={40} /></a>
-				<a href="#"><AiOutlineInstagram size={40} /></a>
-				<a href="#"><AiOutlineLinkedin size={40} /></a>
-				<a href="#"><AiOutlineTwitter size={40} /></a>
+				<a href="https://github.com/DhanushNehru"><AiFillGithub size={40} /></a>
+				<a href="https://www.instagram.com/dhanush_nehru/"><AiOutlineInstagram size={40} /></a>
+				<a href="https://www.linkedin.com/in/dhanushnehru/"><AiOutlineLinkedin size={40} /></a>
+				<a href="https://twitter.com/Dhanush_Nehru"><AiOutlineTwitter size={40} /></a>
 			</div>
 
 
