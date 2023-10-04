@@ -52,4 +52,4 @@ const GoogleSignIn = () => {
     );
 };
 
-// export default GoogleSignIn
+export default GoogleSignIn
