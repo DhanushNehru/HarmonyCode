@@ -112,8 +112,5 @@ This will automatically start live server in the browser.
 You can make changes and see how it behaves on the go without cloning the repo. 
 
 ## Acknowledgement
-Special thanks to all our contributors for helping make this app better. 🌟
-<br><br>
-   <p align="center">
-  <img src="https://contributors-img.web.app/image?repo=DhanushNehru/HarmonyCode" width = 500/>
-   </p>
+
+If you liked this project support it by starring it 🌟 and share it on social media
