@@ -92,7 +92,8 @@ Provide information on how to use your project once the environment variables ar
 
 ## Contributing
 
-Explain how others can contribute to your project. You can include guidelines for reporting issues, submitting pull requests, and coding standards.
+We welcome contributions from the community! If you're interested in contributing to this project, please read our [contribution guidelines](CONTRIBUTING.md).
+
 
 ## License
 
