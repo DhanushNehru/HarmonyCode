@@ -42,138 +42,63 @@ import {
 	BiCloudRain,
 	BiTrain
 } from 'react-icons/bi';
+import { useTransition, animated } from "@react-spring/web";
 
 const Cards = () => {
+
+	const cardsData = [
+		{ title: "Battle", icon: GiBattleAxe },
+		{ title: "Beach", icon: FaUmbrellaBeach },
+		{ title: "Birds", icon: GiBirdTwitter },
+		{ title: "Boat", icon: RiSailboatLine },
+		{ title: "Book", icon: BsBook },
+		{ title: "Campfire", icon: GiCampfire },
+		{ title: "Chill", icon: BsEmojiSunglasses },
+		{ title: "Clock", icon: AiOutlineClockCircle },
+		{ title: "Drinking", icon: GiDrinking },
+		{ title: "Dripping Water", icon: BsDroplet },
+		{ title: "Energy", icon: GiRollingEnergy },
+		{ title: "Farm", icon: GiFarmTractor },
+		{ title: "Fireworks", icon: GiFireworkRocket },
+		{ title: "Flute", icon: GiFlute },
+		{ title: "Footsteps", icon: RiFootprintLine },
+		{ title: "Forest", icon: GiForest },
+		{ title: "Grind", icon: GiRockingChair },
+		{ title: "Keyboard", icon: BsKeyboard },
+		{ title: "Leaves", icon: RiLeafLine },
+		{ title: "Mouse", icon: BsMouse },
+		{ title: "Polozhenie", icon: ImSigma },
+		{ title: "Rain", icon: BiCloudRain },
+		{ title: "Retro", icon: BsSunglasses },
+		{ title: "River", icon: GiWaterfall },
+		{ title: "Road", icon: GiRoad },
+		{ title: "Rocket", icon: RiRocketLine },
+		{ title: "Snow", icon: BsCloudSnow },
+		{ title: "Storm", icon: BsTropicalStorm },
+		{ title: "Thunder", icon: AiOutlineThunderbolt },
+		{ title: "Train", icon: BiTrain },
+		{ title: "Victory", icon: AiOutlineTrophy },
+		{ title: "Wildcard", icon: AiOutlineQuestion }
+	];
+
+	const transition = useTransition(cardsData, {
+		from: { opacity: 0.2 },
+		enter: { opacity: 1 },
+		config: { tension: 220, friction: 120 },
+		trail: 130
+	  });
+
 	return (
 		<div className="flex flex-wrap items-center justify-center gap-4 my-8 w-[90%] mx-auto">
-			<Card
-				title="Battle"
-				Icon={GiBattleAxe}
-			/>
-			<Card
-				title="Beach"
-				Icon={FaUmbrellaBeach}
-			/>
-			<Card
-				title="Birds"
-				Icon={GiBirdTwitter}
-			/>
-			<Card
-				title="Boat"
-				Icon={RiSailboatLine}
-			/>
-			<Card
-				title="Book"
-				Icon={BsBook}
-			/>
-			<Card
-				title="Campfire"
-				Icon={GiCampfire}
-			/>
-			<Card
-				title="Chill"
-				Icon={BsEmojiSunglasses}
-			/>
-			<Card
-				title="Clock"
-				Icon={AiOutlineClockCircle}
-			/>
-			<Card
-				title="Drinking"
-				Icon={GiDrinking}
-			/>
-			<Card
-				title="Dripping Water"
-				Icon={BsDroplet}
-			/>
-			<Card
-				title="Energy"
-				Icon={GiRollingEnergy}
-			/>
-			<Card
-				title="Farm"
-				Icon={GiFarmTractor}
-			/>
-			<Card
-				title="Fireworks"
-				Icon={GiFireworkRocket}
-			/>
-			<Card
-				title="Flute"
-				Icon={GiFlute}
-			/>
-			<Card
-				title="Footsteps"
-				Icon={RiFootprintLine}
-			/>
-			<Card
-				title="Forest"
-				Icon={GiForest}
-			/>
-			<Card
-				title="Grind"
-				Icon={GiRockingChair}
-			/>
-			<Card
-				title="Keyboard"
-				Icon={BsKeyboard}
-			/>
-			<Card
-				title="Leaves"
-				Icon={RiLeafLine}
-			/>
-			<Card
-				title="Mouse"
-				Icon={BsMouse}
-			/>
-			<Card
-				title="Polozhenie"
-				Icon={ImSigma}
-			/>
-			<Card
-				title="Rain"
-				Icon={BiCloudRain}
-			/>
-			<Card
-				title="Retro"
-				Icon={BsSunglasses}
-			/>
-			<Card
-				title="River"
-				Icon={GiWaterfall}
-			/>
-			<Card
-				title="Road"
-				Icon={GiRoad}
-			/>
-			<Card
-				title="Rocket"
-				Icon={RiRocketLine}
-			/>
-			<Card
-				title="Snow"
-				Icon={BsCloudSnow}
-			/>
-			<Card
-				title="Storm"
-				Icon={BsTropicalStorm}
-			/>
-			<Card
-				title="Thunder"
-				Icon={AiOutlineThunderbolt}
-			/>
-			<Card
-				title="Train"
-				Icon={BiTrain}
-			/>
-			<Card
-				title="Victory"
-				Icon={AiOutlineTrophy}
-			/>
-			<Card
-				title="Wildcard"
-				Icon={AiOutlineQuestion}
-			/>
+			{transition((style, card) => (
+				<animated.div style={style}>
+					<Card
+						key={card.title}
+						title={card.title}
+						Icon={card.icon}
+					/>
+				</animated.div>
+            ))}
 		</div>
 	);
 }
