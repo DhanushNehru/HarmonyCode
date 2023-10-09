@@ -8,7 +8,7 @@ import {
 	WhatsappIcon,
 	WhatsappShareButton
 } from "next-share";
-import { AiFillGithub, AiOutlineInstagram, AiOutlineTwitter, AiOutlineLinkedin, AiOutlineYoutube } from "react-icons/ai"
+import { AiFillGithub, AiOutlineInstagram, FaXTwitter, AiOutlineLinkedin, AiOutlineYoutube } from "react-icons/ai"
 
 const Footer = () => {
 	return (
@@ -29,7 +29,7 @@ const Footer = () => {
 				<a href="https://github.com/DhanushNehru"><AiFillGithub size={40} /></a>
 				<a href="https://www.instagram.com/dhanush_nehru/"><AiOutlineInstagram size={40} /></a>
 				<a href="https://www.linkedin.com/in/dhanushnehru/"><AiOutlineLinkedin size={40} /></a>
-				<a href="https://twitter.com/Dhanush_Nehru"><AiOutlineTwitter size={40} /></a>
+				<a href="https://twitter.com/Dhanush_Nehru"><FaXTwitter size={40} /></a>
 				<a href="https://www.youtube.com/@dhanushnehru?sub_confirmation=1"><AiOutlineYoutube size={40} /></a>
 			</div>
 
