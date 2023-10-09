@@ -147,3 +147,5 @@ Start your application by running the command npm run dev.
 ## Acknowledgement
 
 If you liked this project support it by starring it 🌟 and share it on social media
+
+Hey, I am Dhanush N,the maintainer of this opensource repository. You can connect with me and support or follow my work via [Twitter](https://twitter.com/Dhanush_Nehru) / [Instagram](https://www.instagram.com/dhanush_nehru/) / [Youtube](https://www.youtube.com/@dhanushnehru?sub_confirmation=1) / [Github](https://github.com/DhanushNehru)
