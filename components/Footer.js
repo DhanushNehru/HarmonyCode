@@ -15,10 +15,11 @@ import {
   import {
 	AiFillGithub,
 	AiOutlineInstagram,
-	AiOutlineTwitter,
 	AiOutlineLinkedin,
 	AiOutlineYoutube,
   } from "react-icons/ai";
+
+  import { RiTwitterXFill } from "react-icons/ri";
   
   const Footer = () => {
 	return (
@@ -53,7 +54,7 @@ import {
 			href="https://twitter.com/Dhanush_Nehru"
 			className="hover:shadow-2xl  hover:translate-y-1"
 		  >
-			<AiOutlineTwitter size={40} />
+			<RiTwitterXFill size={40} />
 		  </a>
 		  <a
 			href="https://www.youtube.com/@dhanushnehru?sub_confirmation=1"
