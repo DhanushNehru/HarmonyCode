@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
 import GoogleSignIn from "./GoogleSignIn";
+import GithubSignIn from "./GithubSignIn";
+import { useAuth } from '../context/AuthContext.js';
 
 const Header = () => {
 	const [stars, setStars] = useState(0);
+	const { currentUser, logOut } = useAuth();
+
 	// Fetch the number of stargazers of the repository (harmonycode)
 	useEffect(() => {
 		const perPage = 100; // Number of repositories per page (maximum is often 100)
@@ -24,6 +28,14 @@ const Header = () => {
 		fetchStars();
 	}, []);
 
+	const handleSignOut = async () => {
+		try {
+			await logOut();
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	return (
 		<header className="w-full bg-[#fafafa] flex items-center justify-between shadow-sm p-2 dark:bg-[#1a1a1a]">
 			{/* Logo */}
@@ -34,9 +46,23 @@ const Header = () => {
 			</div>
 			
 			<div className="flex items-center space-x-2">
-				{/* Google Login */}
-					<GoogleSignIn/>
-				{/* Github Card */}
+				{
+					currentUser ? (
+					<div className='flex items-center border border-gray-300 rounded-md px-2 py-1 bg-white transition-all duration-250 hover:bg-gray-100 dark:bg-black dark:border-gray-500'>
+						<button
+						onClick={handleSignOut}
+						className='font-bold text-gray-700 dark:text-white'
+						>
+						<span>Logout</span>
+						</button>
+				  </div>
+				  ) : (
+				    <>
+						<GoogleSignIn/>
+						<GithubSignIn/>
+					</> 
+					)
+				}
 				<a
 					href="https://www.github.com/DhanushNehru"
 					className="hidden md:block lg:block"
