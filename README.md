@@ -101,6 +101,13 @@ This project is licensed under the [License Name] - see the [LICENSE.md](LICENSE
  and contributions are welcome!
 
 ---
+## Best Contributors
+
+<div align="center">
+    <a  href="https://github.com/DhanushNehru/HarmonyCode/graphs/contributors">
+        <img src="https://contrib.rocks/image?repo=DhanushNehru/HarmonyCode&anon=1" />
+    </a>
+</div>
 
 ## Gitpod
 
@@ -145,5 +152,7 @@ Open the terminal in Gitpod and type `gp env` to verify if the environment varia
 Start your application by running the command npm run dev.
 
 ## Acknowledgement
+
+Hey, I am Dhanush N,the maintainer of this opensource repository. You can connect with me and support or follow my work via [Twitter](https://twitter.com/Dhanush_Nehru) / [Instagram](https://www.instagram.com/dhanush_nehru/) / [Youtube](https://www.youtube.com/@dhanushnehru?sub_confirmation=1) / [Github](https://github.com/DhanushNehru)
 
 If you liked this project support it by starring it 🌟 and share it on social media
