@@ -92,7 +92,7 @@ To run this project, you need to set up environment variables for Firebase. Thes
    3. Click on "Add new provider", then find "Google" and enable it. Configure OAuth consent screen details if required.
    4. Google Authentication is now enabled in your project.
 
-     For detailed instructions, refer to the [Firebase Authentication documentation](https://firebase.google.com/docs/auth/web/google-signin).
+     For detailed instructions, refer to the Firebase's [Google Authentication documentation](https://firebase.google.com/docs/auth/web/google-signin).
 
    **Github Authentication**:
 
