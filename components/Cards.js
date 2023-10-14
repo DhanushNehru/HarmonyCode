@@ -12,7 +12,8 @@ import {
 	GiRockingChair,
 	GiWaterfall,
 	GiRoad,
-	GiFlute
+	GiFlute,
+	GiCuckooClock
 } from 'react-icons/gi';
 import { FaUmbrellaBeach } from 'react-icons/fa';
 import {
@@ -29,7 +30,8 @@ import {
 	BsMouse,
 	BsSunglasses,
 	BsCloudSnow,
-	BsTropicalStorm
+	BsTropicalStorm,
+	BsTelephone
 } from 'react-icons/bs';
 import {
 	AiOutlineClockCircle,
@@ -42,6 +44,7 @@ import {
 	BiCloudRain,
 	BiTrain
 } from 'react-icons/bi';
+import { FaHelicopter, FaGhost } from 'react-icons/fa';
 import { useTransition, animated } from "@react-spring/web";
 
 const Cards = () => {
@@ -55,6 +58,7 @@ const Cards = () => {
 		{ title: "Campfire", icon: GiCampfire },
 		{ title: "Chill", icon: BsEmojiSunglasses },
 		{ title: "Clock", icon: AiOutlineClockCircle },
+		{ title: "Clock Bell", icon: GiCuckooClock },
 		{ title: "Drinking", icon: GiDrinking },
 		{ title: "Dripping Water", icon: BsDroplet },
 		{ title: "Energy", icon: GiRollingEnergy },
@@ -64,6 +68,7 @@ const Cards = () => {
 		{ title: "Footsteps", icon: RiFootprintLine },
 		{ title: "Forest", icon: GiForest },
 		{ title: "Grind", icon: GiRockingChair },
+		{ title: "Helicopter", icon: FaHelicopter },
 		{ title: "Keyboard", icon: BsKeyboard },
 		{ title: "Leaves", icon: RiLeafLine },
 		{ title: "Mouse", icon: BsMouse },
@@ -74,7 +79,9 @@ const Cards = () => {
 		{ title: "Road", icon: GiRoad },
 		{ title: "Rocket", icon: RiRocketLine },
 		{ title: "Snow", icon: BsCloudSnow },
+		{ title: "Spooky", icon: FaGhost },
 		{ title: "Storm", icon: BsTropicalStorm },
+		{ title: "Telephone", icon: BsTelephone },
 		{ title: "Thunder", icon: AiOutlineThunderbolt },
 		{ title: "Train", icon: BiTrain },
 		{ title: "Victory", icon: AiOutlineTrophy },
