@@ -28,7 +28,7 @@ const Header = () => {
 		<header className="w-full bg-[#fafafa] flex items-center justify-between shadow-sm p-2 dark:bg-[#1a1a1a]">
 			{/* Logo */}
 			<div>
-				<h1 className="font-bold text-md md:text-2xl lg:text-2xl text-gray-700 dark:text-gray-300">
+				<h1 className="font-playfair text-md md:text-2xl lg:text-2xl text-gray-700 dark:text-gray-300" >
 					Harmony Code 🎶
 				</h1>
 			</div>
@@ -70,6 +70,7 @@ const Header = () => {
 					</div>
 				</a>
 			</div>
+			
 		</header>
 	);
 };
