@@ -42,7 +42,7 @@ Before you begin, ensure you have met the following requirements:
 
 - Node.js: Make sure you have Node.js installed on your machine. You can download it from [nodejs.org](https://nodejs.org/).
 
-### Setting Up Firebase Environment Variables
+### Setting Up Firebase Environment Variables and Enabling Authentication
 
 To run this project, you need to set up environment variables for Firebase. These variables contain sensitive information and should not be hard-coded in your codebase. Follow these steps to set up the required environment variables:
 
@@ -83,7 +83,29 @@ To run this project, you need to set up environment variables for Firebase. Thes
 4. **Load Environment Variables**:
    - Ensure that you have a method to load environment variables in your Next.js application. You can use packages like `dotenv` or Vercel's built-in support for environment variables.
 
-5. **Start Your Application**:
+5. **Enabling Authentication**:
+
+   **Google Authentication**:
+   
+   1. Go to the Firebase Console and select your project.
+   2. Navigate to the "Authentication" section and click on the "Sign-in method" tab.
+   3. Click on "Add new provider", then find "Google" and enable it. Configure OAuth consent screen details if required.
+   4. Google Authentication is now enabled in your project.
+
+     For detailed instructions, refer to the Firebase's [Google Authentication documentation](https://firebase.google.com/docs/auth/web/google-signin).
+
+   **Github Authentication**:
+
+   1. Go to the [GitHub Developer Settings](https://github.com/settings/developers) and create a new GitHub OAuth application.
+   2. Set the "Application Name", "Homepage URL" and ensure the "Authorization callback URL" matches your Firebase project's settings. Register the application.
+   3. Note the "Client ID" and "Client Secret."
+   4. In the Firebase Console, on your project, navigate to the "Authentication" section.
+   5. Enable GitHub Authentication in the "Sign-in method" tab by providing the "Client ID" and "Client Secret" obtained from GitHub. Configure OAuth consent screen details if required.
+   6. Github Authentication is now enabled in your project.
+
+    For detailed instructions, refer to the Firebase's [GitHub Authentication documentation](https://firebase.google.com/docs/auth/web/github-auth).
+   
+6. **Start Your Application**:
    - You can now start your Next.js application. The Firebase configuration will be loaded from the environment variables you set up.
 
 ## Usage
