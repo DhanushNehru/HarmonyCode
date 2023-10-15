@@ -43,6 +43,21 @@ const Card = ({ title, Icon }) => {
     }
   };
 
+  const getSrc = (title)=>{
+    
+    let src = "/sounds/";
+    const firstCharacterLower = title[0].toLowerCase();
+
+    if(title.includes(" ")){
+      const spaceIndex = title.indexOf(" ");
+      src+=  firstCharacterLower + title.slice(1, spaceIndex) + "_" + title[spaceIndex + 1].toLowerCase() + title.slice(spaceIndex + 2)
+    } else{
+      src+= firstCharacterLower + title.slice(1);
+    }
+    src+='.mp3';
+    return src
+  }
+
   return (
     <div className={`relative bg-white p-4 rounded-2xl w-[240px] h-[220px] shadow-lg hover:shadow-2xl hover:bg-gray-200 hover:translate-y-1 cursor-pointer transition-all duration-150 flex flex-col space-y-4 dark:bg-[#252424] hover:dark:bg-[black] ${isPlaying && 'border-4 border-blue-500'}`}>
       <div onClick={startStopSound} className="h-full">
@@ -66,7 +81,7 @@ const Card = ({ title, Icon }) => {
 			}
 
       <audio
-        src={`/sounds/${!title.includes(" ") ? `${title[0].toLowerCase()}${title.slice(1)}` : `${title.slice(0, title.indexOf(" "))}_${title.slice((title.indexOf(" ") + 1))}`}.mp3`}
+        src={getSrc(title)}
         controls
         ref={audioRef}
         loop
