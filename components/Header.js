@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import GoogleSignIn from "./GoogleSignIn";
+import { FaMusic } from 'react-icons/fa';
 
 const Header = () => {
 	const [stars, setStars] = useState(0);
@@ -27,9 +28,9 @@ const Header = () => {
 	return (
 		<header className="w-full bg-[#fafafa] flex items-center justify-between shadow-sm p-2 dark:bg-[#1a1a1a]">
 			{/* Logo */}
-			<div>
-				<h1 className="font-playfair text-md md:text-2xl lg:text-2xl text-gray-700 dark:text-gray-300" >
-					Harmony Code 🎶
+			<div className="ml-4">
+				<h1 className="flex items-center font-bold font-playfair text-md md:text-2xl lg:text-2xl text-gray-700 dark:text-gray-300 " >
+					Harmony Code <FaMusic className= "ml-2" />
 				</h1>
 			</div>
 			
