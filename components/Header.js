@@ -48,6 +48,10 @@ const Header = () => {
 			<div className="flex items-center space-x-2">
 				{
 					currentUser ? (
+						<>
+						{/* Logged in User's name */}
+						<span className="font-bold text-gray-800 dark:text-white"> Welcome, {currentUser.displayName} </span>
+
 					<div className='flex items-center border border-gray-300 rounded-md px-2 py-1 bg-white transition-all duration-250 hover:bg-gray-100 dark:bg-black dark:border-gray-500'>
 						<button
 						onClick={handleSignOut}
@@ -56,6 +60,7 @@ const Header = () => {
 						<span>Logout</span>
 						</button>
 				  </div>
+				  </>
 				  ) : (
 				    <>
 						<GoogleSignIn/>
