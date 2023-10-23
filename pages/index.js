@@ -4,6 +4,7 @@ import Cards from "../components/Cards";
 import Footer from "../components/Footer";
 import ThemeToggler from "../components/ThemeToggler";
 import { AuthProvider, useAuth } from "../context/AuthContext";
+import SignIn from "../components/SignIn";
 
 const Home = () => {
   return (
@@ -49,21 +50,18 @@ const HomeContent = () => {
 
       {currentUser ? (
         // Render the content for authenticated users
-        <Cards />
+        <>
+          <Cards />
+          <Footer />
+          <ThemeToggler />
+        </>
       ) : (
         // Render the appropriate sign-in component for non-authenticated users
         <>
-          <p className="text-xl text-gray-500 dark:text-gray-200 text-center mt-8 bg-white hover:bg-gray-200 p-4 rounded-lg hover:shadow-2xl shadow-lg hover:translate-y-1 transition-all duration-150 dark:bg-[#252424] hover:dark:bg-[black] flex flex-wrap items-center justify-center my-8 w-[90%] mx-auto">
-            Please Sign in to use the app!
-          </p>
-
-          <Cards />
+          <SignIn />
+          <ThemeToggler />
         </>
       )}
-
-      <Footer />
-
-      <ThemeToggler />
     </>
   );
 };
