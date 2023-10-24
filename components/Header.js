@@ -69,7 +69,7 @@ const Header = () => {
 					)
 				}
 				<a
-					href="https://www.github.com/DhanushNehru"
+					href="https://github.com/DhanushNehru/HarmonyCode"
 					className="hidden md:block lg:block"
 				>
 					<div className="flex items-center border border-gray-300 rounded-md px-2 py-1 bg-white transition-all duration-250 hover:bg-yellow-100 dark:bg-black dark:border-gray-500">
