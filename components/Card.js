@@ -10,6 +10,38 @@ const Card = ({ title, Icon }) => {
   const audioRef = useRef(null);
   const { currentUser, googleSignIn } = useAuth();
 
+  const colors = [
+    '#00ccff', // Electric Blue
+    '#33ff33', // Neon Green
+    '#ff3399', // Vibrant Pink
+    '#cc33ff', // Electric Purple
+    '#ff9933', // Radiant Orange
+    '#FFD700', // Gold
+    '#ff3333', // Fiery Red
+    '#00ffff', // Aqua Blue
+    '#33cc33', // Brilliant Green
+    '#ff66cc', // Hot Pink
+  ];
+
+  // function to generate random color
+  const getRandomColor = () => {
+    const randomIndex = Math.floor(Math.random() * colors.length);
+    return colors[randomIndex];
+  };
+
+  // invoking random color function
+  const randomColor = getRandomColor();
+
+  // Create a state variable to track hover state
+  const [isHovered, setIsHovered] = useState(false);
+
+  const glowEffectStyles = {
+    boxShadow: isHovered
+      ? `0 0 10px 5px ${randomColor}, 0 0 10px 5px ${randomColor}`
+      : 'none',
+    transition: 'all 0.2s ease-in-out',
+  };
+
   const checkAuth = () => {
     if (currentUser) {
       return true;
@@ -25,17 +57,16 @@ const Card = ({ title, Icon }) => {
     }
   };
 
-  const changeVolume = event => {
+  const changeVolume = (event) => {
     setVolume(event.target.value / 100);
     audioRef.current.volume = volume;
-  }
+  };
 
   const startStopSound = () => {
     if (checkAuth()) {
-      if(!isPlaying) {
+      if (!isPlaying) {
         audioRef.current.play();
-      } 
-	  else {
+      } else {
         audioRef.current.pause();
       }
 
@@ -43,31 +74,55 @@ const Card = ({ title, Icon }) => {
     }
   };
 
-  const getSrc = (title)=>{
-    
-    let src = "/sounds/";
+  const getSrc = (title) => {
+    let src = '/sounds/';
     const firstCharacterLower = title[0].toLowerCase();
 
-    if(title.includes(" ")){
-      const spaceIndex = title.indexOf(" ");
-      src+=  firstCharacterLower + title.slice(1, spaceIndex) + "_" + title[spaceIndex + 1].toLowerCase() + title.slice(spaceIndex + 2)
-    } else{
-      src+= firstCharacterLower + title.slice(1);
+    if (title.includes(' ')) {
+      const spaceIndex = title.indexOf(' ');
+      src +=
+        firstCharacterLower +
+        title.slice(1, spaceIndex) +
+        '_' +
+        title[spaceIndex + 1].toLowerCase() +
+        title.slice(spaceIndex + 2);
+    } else {
+      src += firstCharacterLower + title.slice(1);
     }
-    src+='.mp3';
-    return src
-  }
+    src += '.mp3';
+    return src;
+  };
 
   return (
-    <div className={`relative bg-white p-4 rounded-2xl w-[240px] h-[220px] shadow-lg hover:shadow-2xl hover:bg-gray-200 hover:translate-y-1 cursor-pointer transition-all duration-150 flex flex-col space-y-4 dark:bg-[#252424] hover:dark:bg-[black] ${isPlaying && 'border-4 border-blue-500'}`}>
+    <div
+      className={`relative bg-white p-4 rounded-2xl w-[240px] h-[220px] shadow-lg hover:shadow-2xl hover:bg-gray-200 hover:translate-y-1 cursor-pointer transition-all duration-150 flex flex-col space-y-4 dark:bg-[#252424] hover:dark:bg-[black] ${
+        isPlaying && 'border-4 border-blue-500'
+      }`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      style={glowEffectStyles}
+    >
       <div onClick={startStopSound} className="h-full">
-        <h3 className="text-gray-500 dark:text-gray-200">{title}</h3>
+        <h3
+          className="text-gray-500 dark:text-gray-200"
+          style={{
+            transition: 'all 0.2s ease-in-out',
+            color: isHovered && randomColor,
+          }}
+        >
+          {title}
+        </h3>
 
-        <Icon className="text-gray-500 w-full h-1/2 mt-4" />
+        <Icon
+          className="text-gray-500 w-full h-1/2 mt-4"
+          style={{
+            transition: 'all 0.2s ease-in-out',
+            color: isHovered && randomColor,
+          }}
+        />
       </div>
 
-      {
-				isPlaying && (
+      {isPlaying && (
         <div className="absolute bottom-0 left-0 right-0 bg-[whitesmoke] rounded-b-2xl flex items-center justify-center p-2 dark:bg-[#1a1a1a]">
           <Slider
             aria-label="Volume"
@@ -77,8 +132,7 @@ const Card = ({ title, Icon }) => {
             style={{ width: '75%' }}
           />
         </div>
-      )
-			}
+      )}
 
       <audio
         src={getSrc(title)}
@@ -89,6 +143,6 @@ const Card = ({ title, Icon }) => {
       ></audio>
     </div>
   );
-}
+};
 
 export default Card;
