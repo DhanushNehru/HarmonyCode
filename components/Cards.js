@@ -13,9 +13,14 @@ import {
 	GiWaterfall,
 	GiRoad,
 	GiFlute,
+ Add-some-music-components
+	GiDrum
+
+
 	GiCuckooClock
+ main
 } from 'react-icons/gi';
-import { FaUmbrellaBeach } from 'react-icons/fa';
+import { FaUmbrellaBeach, FaCar, FaMountain } from 'react-icons/fa';
 import {
 	RiSailboatLine,
 	RiLeafLine,
@@ -85,7 +90,10 @@ const Cards = () => {
 		{ title: "Thunder", icon: AiOutlineThunderbolt },
 		{ title: "Train", icon: BiTrain },
 		{ title: "Victory", icon: AiOutlineTrophy },
-		{ title: "Wildcard", icon: AiOutlineQuestion }
+		{ title: "Wildcard", icon: AiOutlineQuestion },
+		{ title: "DrumRoll", icon:	GiDrum },
+		{ title: "Car", icon:	FaCar },
+		{ title: "Mountain", icon:	FaMountain }
 	];
 
 	const transition = useTransition(cardsData, {
