@@ -41,7 +41,7 @@ const Header = () => {
 			{/* Logo */}
 			<div>
 				<h1 className="font-bold text-md md:text-2xl lg:text-2xl text-gray-700 dark:text-gray-300">
-					Harmony Code 🎶
+					Harmony Code 🎶 🎶
 				</h1>
 			</div>
 			
