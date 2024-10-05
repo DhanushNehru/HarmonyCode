@@ -74,6 +74,7 @@ To run this project, you need to set up environment variables for Firebase. Thes
      NEXT_PUBLIC_STORAGE_BUCKET=<Your-Storage-Bucket>
      NEXT_PUBLIC_MESSAGING_SENDER_ID=<Your-Messaging-Sender-ID>
      NEXT_PUBLIC_APP_ID=<Your-App-ID>
+     NEXT_PUBLIC_GEMINI_API_KEY=<your-gemini-api>
      ```
 
    Replace `<Your-API-Key>`, `<Your-Auth-Domain>`, etc., with the respective values you obtained from Firebase.

@@ -1,5 +1,5 @@
 import Card from './Card';
-
+import AiRecommendation from './AiRecommendation';
 import {
 	GiBattleAxe,
 	GiBirdTwitter,
@@ -97,6 +97,7 @@ const Cards = () => {
 
 	return (
 		<div className="flex flex-wrap items-center justify-center gap-4 my-8 w-[90%] mx-auto">
+			<AiRecommendation data = { cardsData } />
 			{transition((style, card) => (
 				<animated.div style={style}>
 					<Card
