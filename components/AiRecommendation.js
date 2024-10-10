@@ -34,6 +34,7 @@ import {
   BsCloudSnow,
   BsTropicalStorm,
   BsTelephone,
+  BsSearch,
 } from "react-icons/bs";
 import {
   AiOutlineClockCircle,
@@ -82,13 +83,15 @@ const AiRecommendation = ({ data }) => {
     const result = await chatSession.sendMessage(search);
     const response = await result.response.text();
     console.log(result.response.text());
-    let cleanedResponse = search.length < 0 ? [] : response.split(',').map(title => title.trim());
+    let cleanedResponse =
+      search.length < 0 ? [] : response.split(",").map((title) => title.trim());
     if (cleanedResponse.length > 5) {
       cleanedResponse.splice(5);
     }
 
-    setRecommendation(data.filter((item) => cleanedResponse.includes(item.title)));
-    
+    setRecommendation(
+      data.filter((item) => cleanedResponse.includes(item.title))
+    );
   }
 
   useEffect(() => {
@@ -104,17 +107,22 @@ const AiRecommendation = ({ data }) => {
 
   return (
     <div className="container mx-auto border border-white shadow-md rounded-xl">
-      <h1 className="text-3xl text-center p-2 ">AI Recommendation</h1>
+      <h1 className="text-3xl text-center p-2 text-gray-700 dark:text-gray-400">
+        AI Recommendation
+      </h1>
       <div className="flex items-center justify-center gap-4 my-8">
         <input
           type="text"
           placeholder="Search"
           onChange={(e) => setSearch(e.target.value)}
-          className="border border-gray-400 p-2 rounded-md"
+          className="border border-gray-400 p-2 rounded-md w-1/2"
         />
-        <button 
-          className="bg-blue-500 text-white p-2 rounded-md"
-          onClick={() => run()}>Search</button>
+        <button
+          className="bg-gray-700 dark:bg-gray-400 text-white p-2 rounded-md"
+          onClick={() => run()}
+        >
+          <BsSearch className="h-[1.5em]" />
+        </button>
       </div>
       <div className="flex flex-wrap items-center justify-center gap-4 my-8 w-[90%] mx-auto">
         {transition((style, card) => (
