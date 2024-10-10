@@ -1,4 +1,6 @@
 import Card from './Card';
+import {useRef, useEffect} from 'react'
+import { useAuth } from '../context/AuthContext.js';
 import AiRecommendation from './AiRecommendation';
 import {
 	GiBattleAxe,
@@ -44,7 +46,7 @@ import {
 	BiCloudRain,
 	BiTrain
 } from 'react-icons/bi';
-import { FaHelicopter, FaGhost } from 'react-icons/fa';
+import { FaHelicopter, FaGhost, FaStop } from 'react-icons/fa';
 import { useTransition, animated } from "@react-spring/web";
 
 const Cards = () => {
@@ -87,6 +89,39 @@ const Cards = () => {
 		{ title: "Victory", icon: AiOutlineTrophy },
 		{ title: "Wildcard", icon: AiOutlineQuestion }
 	];
+	const playingCardsRef = useRef(new Set());
+  	const stopAllRef = useRef(null);
+	const { currentUser } = useAuth();
+	useEffect(() => {
+		if (!currentUser) {
+		  handleStopAll();
+		}
+	  }, [currentUser]);
+  	const handlePlayStateChange = (title, isPlaying) => {
+  	  if (isPlaying) {
+  	    playingCardsRef.current.add(title);
+  	  } else {
+  	    playingCardsRef.current.delete(title);
+  	  }
+	
+  	  // Update stop all button visibility
+  	  if (stopAllRef.current) {
+  	    if (playingCardsRef.current.size > 0) {
+  	      stopAllRef.current.classList.remove('hidden');
+  	    } else {
+  	      stopAllRef.current.classList.add('hidden');
+  	    }
+  	  }
+  	};
+
+  	const handleStopAll = () => {
+  	  const event = new CustomEvent('stopAllSounds');
+  	  window.dispatchEvent(event);
+  	  playingCardsRef.current.clear();
+  	  if (stopAllRef.current) {
+  	    stopAllRef.current.classList.add('hidden');
+  	  }
+  	};
 
 	const transition = useTransition(cardsData, {
 		from: { opacity: 0.2 },
@@ -104,9 +139,17 @@ const Cards = () => {
 						key={card.title}
 						title={card.title}
 						Icon={card.icon}
+						onPlayStateChange={(isPlaying) => handlePlayStateChange(card.title, isPlaying)}
 					/>
 				</animated.div>
             ))}
+			<button
+        		ref={stopAllRef}
+        		onClick={handleStopAll}
+        		className="fixed bottom-20 right-4 bg-red-500 hover:bg-red-600 text-white font-bold px-4 py-4 rounded-full shadow-lg transition-all duration-150 transform hover:scale-105 hidden"
+      		>
+       		 <FaStop />
+     		</button>
 		</div>
 	);
 }
