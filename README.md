@@ -22,6 +22,14 @@
 
 <h2 align='center'> Music for your coding 🎵</h2>
 
+<div align="center">
+  
+[![Join Our Discord](https://img.shields.io/badge/Discord-Join%20Server-blue?logo=discord&style=for-the-badge)](https://discord.com/invite/Yn9g6KuWyA)
+[![Subscribe on YouTube](https://img.shields.io/badge/YouTube-Subscribe-red?logo=youtube&style=for-the-badge)](https://www.youtube.com/@dhanushnehru?sub_confirmation=1)
+[![Subscribe to Newsletter](https://img.shields.io/badge/Newsletter-Subscribe-orange?style=for-the-badge)](https://dhanushn.substack.com/)
+
+</div>
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Table of Contents
@@ -174,8 +182,8 @@ Open the terminal in Gitpod and type `gp env` to verify if the environment varia
 8. **Start the Application:**
 Start your application by running the command npm run dev.
 
-## Acknowledgement
+</br>
 
-Hey, I am Dhanush N,the maintainer of this opensource repository. You can connect with me and support or follow my work via [Twitter](https://twitter.com/Dhanush_Nehru) / [Instagram](https://www.instagram.com/dhanush_nehru/) / [Youtube](https://www.youtube.com/@dhanushnehru?sub_confirmation=1) / [Github](https://github.com/DhanushNehru) / [Newsletter](https://dhanushn.substack.com/) / [Discord](https://discord.com/invite/Yn9g6KuWyA)
-
-If you liked this project support it by starring it 🌟 and share it on social media
+<div align="center">
+  If you liked this project support it by starring it 🌟 and share it on social media
+</div>
