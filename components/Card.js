@@ -1,15 +1,29 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 import { useAuth } from '../context/AuthContext.js';
 
 import { Slider } from '@mui/material';
 
-const Card = ({ title, Icon }) => {
+const Card = ({ title, Icon, onPlayStateChange }) => {
   const [volume, setVolume] = useState(1);
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
   const { currentUser, googleSignIn } = useAuth();
+  useEffect(() => {
+    const handleStopAll = () => {
+      if (isPlaying && audioRef.current) {
+        audioRef.current.pause();
+        setIsPlaying(false);
+        onPlayStateChange(false);
+      }
+    };
 
+    window.addEventListener('stopAllSounds', handleStopAll);
+    
+    return () => {
+      window.removeEventListener('stopAllSounds', handleStopAll);
+    };
+  }, [isPlaying, onPlayStateChange]);
   const colors = [
     '#00ccff', // Electric Blue
     '#33ff33', // Neon Green
@@ -71,6 +85,7 @@ const Card = ({ title, Icon }) => {
       }
 
       setIsPlaying(!isPlaying);
+      onPlayStateChange(!isPlaying);
     }
   };
 
