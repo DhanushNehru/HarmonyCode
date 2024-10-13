@@ -1,6 +1,6 @@
 node_modules
 package-lock.json
-.env.local
 node_modules/
+.env/
 .next/
 .idea/
