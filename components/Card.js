@@ -1,10 +1,10 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 import { useAuth } from '../context/AuthContext.js';
 
 import { Slider } from '@mui/material';
 
-const Card = ({ title, Icon }) => {
+const Card = ({ title, Icon, singleMode, playingCard, handlePlay, isPlayingGlobal }) => {
   const [volume, setVolume] = useState(1);
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
@@ -60,17 +60,40 @@ const Card = ({ title, Icon }) => {
   const changeVolume = (event) => {
     setVolume(event.target.value / 100);
     audioRef.current.volume = volume;
+
   };
 
-  const startStopSound = () => {
-    if (checkAuth()) {
-      if (!isPlaying) {
+  useEffect(() => {
+    if (singleMode) {
+      if (playingCard === title) {
         audioRef.current.play();
       } else {
         audioRef.current.pause();
       }
+    }
+  }, [playingCard, singleMode]);
 
-      setIsPlaying(!isPlaying);
+  const startStopSound = () => {
+    if (checkAuth()) {
+      if (singleMode) {
+        if (playingCard === title) {
+
+          handlePlay(null);
+        } else {
+          handlePlay(title);
+        }
+
+      }
+      else {
+        if (!isPlaying) {
+          audioRef.current.play();
+        } else {
+          audioRef.current.pause();
+        }
+
+        setIsPlaying(!isPlaying);
+      }
+
     }
   };
 
@@ -95,9 +118,8 @@ const Card = ({ title, Icon }) => {
 
   return (
     <div
-      className={`relative bg-white p-4 rounded-2xl w-[240px] h-[220px] shadow-lg hover:shadow-2xl hover:bg-gray-200 hover:translate-y-1 cursor-pointer transition-all duration-150 flex flex-col space-y-4 dark:bg-[#252424] hover:dark:bg-[black] ${
-        isPlaying && 'border-4 border-blue-500'
-      }`}
+      className={`relative bg-white p-4 rounded-2xl w-[240px] h-[220px] shadow-lg hover:shadow-2xl hover:bg-gray-200 hover:translate-y-1 cursor-pointer transition-all duration-150 flex flex-col space-y-4 dark:bg-[#252424] hover:dark:bg-[black] ${isPlaying && 'border-4 border-blue-500'
+        }`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       style={glowEffectStyles}
@@ -122,7 +144,7 @@ const Card = ({ title, Icon }) => {
         />
       </div>
 
-      {isPlaying && (
+      {isPlaying || isPlayingGlobal && (
         <div className="absolute bottom-0 left-0 right-0 bg-[whitesmoke] rounded-b-2xl flex items-center justify-center p-2 dark:bg-[#1a1a1a]">
           <Slider
             aria-label="Volume"

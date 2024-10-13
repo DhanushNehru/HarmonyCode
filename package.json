@@ -16,7 +16,7 @@
 		"@mui/material": "^5.9.3",
 		"@react-spring/web": "^9.7.3",
 		"dotenv": "^16.3.1",
-		"firebase": "^10.4.0",
+		"firebase": "^10.14.1",
 		"next": "12.2.4",
 		"next-share": "^0.27.0",
 		"next-themes": "^0.2.0",

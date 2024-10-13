@@ -1,5 +1,8 @@
+import { useState } from "react";
 import Card from './Card';
+
 import AiRecommendation from './AiRecommendation';
+
 import {
 	GiBattleAxe,
 	GiBirdTwitter,
@@ -48,6 +51,10 @@ import { FaHelicopter, FaGhost } from 'react-icons/fa';
 import { useTransition, animated } from "@react-spring/web";
 
 const Cards = () => {
+	const [singleMode, setSingleMode] = useState(false);
+	const [playingCard, setPlayingCard] = useState(null);
+	const [isPlayingGlobal, setIsPlayingGlobal] = useState(false);
+
 
 	const cardsData = [
 		{ title: "Battle", icon: GiBattleAxe },
@@ -87,26 +94,51 @@ const Cards = () => {
 		{ title: "Victory", icon: AiOutlineTrophy },
 		{ title: "Wildcard", icon: AiOutlineQuestion }
 	];
+	const handlePlay = (title) => {
+		if (title === null) {
+			setPlayingCard(null);
+			setIsPlayingGlobal(false);
+		} else {
+			setPlayingCard(title);
+			setIsPlayingGlobal(true);
+		}
+	};
 
 	const transition = useTransition(cardsData, {
 		from: { opacity: 0.2 },
 		enter: { opacity: 1 },
 		config: { tension: 220, friction: 120 },
 		trail: 130
-	  });
+	});
 
 	return (
-		<div className="flex flex-wrap items-center justify-center gap-4 my-8 w-[90%] mx-auto">
-			<AiRecommendation data = { cardsData } />
-			{transition((style, card) => (
-				<animated.div style={style}>
-					<Card
-						key={card.title}
-						title={card.title}
-						Icon={card.icon}
-					/>
-				</animated.div>
-            ))}
+		<div className="w-[90%] mx-auto my-8">
+			<div className="flex justify-between items-center mb-4">
+
+				<button
+					className="px-4 py-2 bg-blue-500 text-white rounded"
+					onClick={() => setSingleMode(!singleMode)}
+				>
+					{singleMode ? 'Multiple Mode' : 'Single Mode'}
+				</button>
+			</div>
+			<div className="flex flex-wrap items-center justify-center gap-4">
+				<AiRecommendation data={cardsData} />
+
+				{transition((style, card) => (
+					<animated.div style={style}>
+						<Card
+							key={card.title}
+							title={card.title}
+							Icon={card.icon}
+							singleMode={singleMode}
+							playingCard={playingCard}
+							handlePlay={handlePlay}
+							isPlayingGlobal={singleMode && playingCard === card.title}
+						/>
+					</animated.div>
+				))}
+			</div>
 		</div>
 	);
 }
