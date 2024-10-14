@@ -3,13 +3,13 @@ import { getAuth, GoogleAuthProvider, GithubAuthProvider, signInWithPopup } from
 import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_API_KEY,
-  authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
-  projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_APP_ID,
-  measurementId: process.env.NEXT_PUBLIC_APP_MEASUREMENT_ID,
+  apiKey: "AIzaSyDR4g5Rs1r5yj4NAvw-EACUynvMlXU_81M",
+  authDomain: "loco-musica-hacktoberfest.firebaseapp.com",
+  projectId: "loco-musica-hacktoberfest",
+  storageBucket: "loco-musica-hacktoberfest.appspot.com",
+  messagingSenderId: "1068714579661",
+  appId: "1:1068714579661:web:7c49b7a69dd1ec3b763b84",
+  measurementId: "G-5J6FY11CXV",
 };
 
 const app = initializeApp(firebaseConfig);
