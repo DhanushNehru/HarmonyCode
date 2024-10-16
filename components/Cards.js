@@ -1,5 +1,5 @@
 import Card from './Card';
-import {useRef, useEffect} from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useAuth } from '../context/AuthContext.js';
 import AiRecommendation from './AiRecommendation';
 import {
@@ -50,6 +50,9 @@ import { FaHelicopter, FaGhost, FaStop } from 'react-icons/fa';
 import { useTransition, animated } from "@react-spring/web";
 
 const Cards = () => {
+	const [singleMode, setSingleMode] = useState(false);
+	const [playingCard, setPlayingCard] = useState(null);
+	const [isPlayingGlobal, setIsPlayingGlobal] = useState(false);
 
 	const cardsData = [
 		{ title: "Battle", icon: GiBattleAxe },
@@ -89,67 +92,93 @@ const Cards = () => {
 		{ title: "Victory", icon: AiOutlineTrophy },
 		{ title: "Wildcard", icon: AiOutlineQuestion }
 	];
+
+	const handlePlay = (title) => {
+		if (title === null) {
+			setPlayingCard(null);
+			setIsPlayingGlobal(false);
+		} else {
+			setPlayingCard(title);
+			setIsPlayingGlobal(true);
+		}
+	};
+
 	const playingCardsRef = useRef(new Set());
-  	const stopAllRef = useRef(null);
+	const stopAllRef = useRef(null);
 	const { currentUser } = useAuth();
 	useEffect(() => {
 		if (!currentUser) {
-		  handleStopAll();
+			handleStopAll();
 		}
-	  }, [currentUser]);
-  	const handlePlayStateChange = (title, isPlaying) => {
-  	  if (isPlaying) {
-  	    playingCardsRef.current.add(title);
-  	  } else {
-  	    playingCardsRef.current.delete(title);
-  	  }
-	
-  	  // Update stop all button visibility
-  	  if (stopAllRef.current) {
-  	    if (playingCardsRef.current.size > 0) {
-  	      stopAllRef.current.classList.remove('hidden');
-  	    } else {
-  	      stopAllRef.current.classList.add('hidden');
-  	    }
-  	  }
-  	};
+	}, [currentUser]);
+	const handlePlayStateChange = (title, isPlaying) => {
+		if (isPlaying) {
+			playingCardsRef.current.add(title);
+		} else {
+			playingCardsRef.current.delete(title);
+		}
 
-  	const handleStopAll = () => {
-  	  const event = new CustomEvent('stopAllSounds');
-  	  window.dispatchEvent(event);
-  	  playingCardsRef.current.clear();
-  	  if (stopAllRef.current) {
-  	    stopAllRef.current.classList.add('hidden');
-  	  }
-  	};
+		// Update stop all button visibility
+		if (stopAllRef.current) {
+			if (playingCardsRef.current.size > 0) {
+				stopAllRef.current.classList.remove('hidden');
+			} else {
+				stopAllRef.current.classList.add('hidden');
+			}
+		}
+	};
+
+	const handleStopAll = () => {
+		const event = new CustomEvent('stopAllSounds');
+		window.dispatchEvent(event);
+		playingCardsRef.current.clear();
+		if (stopAllRef.current) {
+			stopAllRef.current.classList.add('hidden');
+		}
+	};
 
 	const transition = useTransition(cardsData, {
 		from: { opacity: 0.2 },
 		enter: { opacity: 1 },
 		config: { tension: 220, friction: 120 },
 		trail: 130
-	  });
+	});
 
 	return (
-		<div className="flex flex-wrap items-center justify-center gap-4 my-8 w-[90%] mx-auto">
-			<AiRecommendation data = { cardsData } />
-			{transition((style, card) => (
-				<animated.div style={style}>
-					<Card
-						key={card.title}
-						title={card.title}
-						Icon={card.icon}
-						onPlayStateChange={(isPlaying) => handlePlayStateChange(card.title, isPlaying)}
-					/>
-				</animated.div>
-            ))}
-			<button
-        		ref={stopAllRef}
-        		onClick={handleStopAll}
-        		className="fixed bottom-20 right-4 bg-red-500 hover:bg-red-600 text-white font-bold px-4 py-4 rounded-full shadow-lg transition-all duration-150 transform hover:scale-105 hidden"
-      		>
-       		 <FaStop />
-     		</button>
+		<div className="w-[90%] mx-auto my-8">
+			<div className="flex justify-between items-center mb-4">
+
+				<button
+					className="px-4 py-2 bg-blue-500 text-white rounded"
+					onClick={() => setSingleMode(!singleMode)}
+				>
+					{singleMode ? 'Multiple Mode' : 'Single Mode'}
+				</button>
+			</div>
+			<div className="flex flex-wrap items-center justify-center gap-4">
+				<AiRecommendation data={cardsData} />
+				{transition((style, card) => (
+					<animated.div style={style}>
+						<Card
+							key={card.title}
+							title={card.title}
+							Icon={card.icon}
+							onPlayStateChange={(isPlaying) => handlePlayStateChange(card.title, isPlaying)}
+							singleMode={singleMode}
+							playingCard={playingCard}
+							handlePlay={handlePlay}
+							isPlayingGlobal={singleMode && playingCard === card.title}
+						/>
+					</animated.div>
+				))}
+				<button
+					ref={stopAllRef}
+					onClick={handleStopAll}
+					className="fixed bottom-20 right-4 bg-red-500 hover:bg-red-600 text-white font-bold px-4 py-4 rounded-full shadow-lg transition-all duration-150 transform hover:scale-105 hidden"
+				>
+					<FaStop />
+				</button>
+			</div>
 		</div>
 	);
 }
