@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext.js';
 
 import { Slider } from '@mui/material';
 
-const Card = ({ title, Icon, onPlayStateChange }) => {
+const Card = ({ title, Icon, onPlayStateChange,singleMode, playingCard, handlePlay, isPlayingGlobal }) => {
   const [volume, setVolume] = useState(1);
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
@@ -24,6 +24,18 @@ const Card = ({ title, Icon, onPlayStateChange }) => {
       window.removeEventListener('stopAllSounds', handleStopAll);
     };
   }, [isPlaying, onPlayStateChange]);
+
+  // useEffect() for single mode
+  useEffect(() => {
+    if (singleMode) {
+      if (playingCard === title) {
+        audioRef.current.play();
+      } else {
+        audioRef.current.pause();
+      }
+    }
+  }, [playingCard, singleMode]);
+
   const colors = [
     '#00ccff', // Electric Blue
     '#33ff33', // Neon Green
@@ -78,14 +90,25 @@ const Card = ({ title, Icon, onPlayStateChange }) => {
 
   const startStopSound = () => {
     if (checkAuth()) {
-      if (!isPlaying) {
-        audioRef.current.play();
-      } else {
-        audioRef.current.pause();
-      }
+      if (singleMode) {
+        if (playingCard === title) {
 
-      setIsPlaying(!isPlaying);
-      onPlayStateChange(!isPlaying);
+          handlePlay(null);
+        } else {
+          handlePlay(title);
+        }
+
+      }
+      else{
+        if (!isPlaying) {
+          audioRef.current.play();
+        } else {
+          audioRef.current.pause();
+        }
+
+        setIsPlaying(!isPlaying);
+        onPlayStateChange(!isPlaying);
+      }
     }
   };
 
@@ -137,7 +160,7 @@ const Card = ({ title, Icon, onPlayStateChange }) => {
         />
       </div>
 
-      {isPlaying && (
+      {isPlaying || isPlayingGlobal  && (
         <div className="absolute bottom-0 left-0 right-0 bg-[whitesmoke] rounded-b-2xl flex items-center justify-center p-2 dark:bg-[#1a1a1a]">
           <Slider
             aria-label="Volume"
