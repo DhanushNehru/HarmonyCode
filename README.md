@@ -27,6 +27,8 @@
 [![Join Our Discord](https://img.shields.io/badge/Discord-Join%20Server-blue?logo=discord&style=for-the-badge)](https://discord.com/invite/Yn9g6KuWyA)
 [![Subscribe on YouTube](https://img.shields.io/badge/YouTube-Subscribe-red?logo=youtube&style=for-the-badge)](https://www.youtube.com/@dhanushnehru?sub_confirmation=1)
 [![Subscribe to Newsletter](https://img.shields.io/badge/Newsletter-Subscribe-orange?style=for-the-badge)](https://dhanushn.substack.com/)
+</br>
+<a href="https://www.producthunt.com/products/harmony-code?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-harmony&#0045;code" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=995359&theme=light&t=1753034697815" alt="Harmony&#0032;Code - Harmony&#0032;code&#0032;is&#0032;a&#0032;platform&#0032;that&#0032;blends&#0032;music&#0032;with&#0032;coding | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
 
 </div>
 
