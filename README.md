@@ -42,7 +42,6 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [License](#license)
-- [Gitpod](#gitpod)
 
 ## Getting Started
 
@@ -141,48 +140,6 @@ This project is licensed under the [License Name] - see the [LICENSE.md](LICENSE
         <img src="https://contrib.rocks/image?repo=DhanushNehru/HarmonyCode&anon=1" />
     </a>
 </div>
-
-## Gitpod
-
-Welcome to Gitpod, your cloud-ready development environment where you can start coding directly and see your changes in action on a live server, all without the need to clone the repository. Here's a guide to help you set up and run your app using Gitpod, specifically addressing the need for Firebase environment variables.
-
-### Setting Up Environment Variables in Gitpod for Firebase
-Before running the app, it's essential to set up Firebase environment variables to ensure the proper functioning of your application. For more detailed information about setting up environment variables in Gitpod, refer to the official Gitpod documentation on [Configuring Projects - Environment Variables](https://www.gitpod.io/docs/configure/projects/environment-variables).
-
-
-1. **Access Gitpod Projects:**
-Navigate to  [Gitpod Projects](https://gitpod.io/projects) and ensure you are logged into your GitHub account.
-
-2. **Create a New Gitpod Project:**
-Click on "New Project" and search for the HarmonyCode repository (fork it if necessary). Choose the HarmonyCode repository.
-
-3. **Access Project Settings:**
-Once the project is created, go to project settings.
-
-4. **Configure Environment Variables:**
-Navigate to the "Variables" section in project settings.
-
-5. **Set Firebase Environment Variables:**
-Add the following Firebase configuration variables:
-   ```env
-      NEXT_PUBLIC_API_KEY=<Your-API-Key>
-      NEXT_PUBLIC_AUTH_DOMAIN=<Your-Auth-Domain>
-      NEXT_PUBLIC_PROJECT_ID=<Your-Project-ID>
-      NEXT_PUBLIC_STORAGE_BUCKET=<Your-Storage-Bucket>
-      NEXT_PUBLIC_MESSAGING_SENDER_ID=<Your-Messaging-Sender-ID>
-      NEXT_PUBLIC_APP_ID=<Your-App-ID>
-   ```
-
-  - Replace `<Your-API-Key>`, `<Your-Auth-Domain>`, etc., with the respective Firebase configuration values. Refer to the "Setting Up Firebase Environment Variables" section for details.
-
-6. **Create a Workspace from the Main Branch:**
-Hover over the "main" branch and click on "Create a new workspace".Click "Continue" to set up the workspace.
-
-7. **Verify Environment Variables:**
-Open the terminal in Gitpod and type `gp env` to verify if the environment variables are correctly set.
-
-8. **Start the Application:**
-Start your application by running the command npm run dev.
 
 </br>
 
