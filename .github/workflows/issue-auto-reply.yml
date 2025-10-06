@@ -9,7 +9,6 @@ permissions:
 
 jobs:
   comment:
-    if: github.event_name == 'issues' && github.event.action == 'opened'
     runs-on: ubuntu-latest
     steps:
       - name: Add welcome comment
