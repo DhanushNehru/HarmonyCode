@@ -1,10 +1,43 @@
 import Head from "next/head";
+import { useState, useEffect } from "react";
 
 import Header from "../components/Header";
 import Cards from "../components/Cards";
 import Footer from "../components/Footer";
 import ThemeToggler from "../components/ThemeToggler";
-import { AuthProvider } from "../context/AuthContext";
+import SignInPrompt from "../components/SignInPrompt";
+import { AuthProvider, useAuth } from "../context/AuthContext";
+
+const HomeContent = () => {
+	const [showSignInPrompt, setShowSignInPrompt] = useState(false);
+	const { currentUser } = useAuth();
+
+	useEffect(() => {
+		// Show sign-in prompt after 3 seconds if user is not signed in
+		const timer = setTimeout(() => {
+			if (!currentUser && !localStorage.getItem('signInPromptDismissed')) {
+				setShowSignInPrompt(true);
+			}
+		}, 3000);
+
+		return () => clearTimeout(timer);
+	}, [currentUser]);
+
+	const handleCloseSignInPrompt = () => {
+		setShowSignInPrompt(false);
+		localStorage.setItem('signInPromptDismissed', 'true');
+	};
+
+	return (
+		<div>
+			<Header />
+			<Cards />
+			<Footer />
+			<ThemeToggler />
+			{showSignInPrompt && <SignInPrompt onClose={handleCloseSignInPrompt} />}
+		</div>
+	);
+};
 
 const Home = () => {
 	return (
@@ -46,13 +79,7 @@ const Home = () => {
 				<link rel="icon" href="/favicon.webp" />
 			</Head>
 
-			<Header />
-
-			<Cards />
-
-			<Footer />
-
-			<ThemeToggler />
+			<HomeContent />
 			</AuthProvider>
 		</div>
 	);
