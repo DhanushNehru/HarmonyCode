@@ -15,8 +15,13 @@ const HomeContent = () => {
 	useEffect(() => {
 		// Show sign-in prompt after 3 seconds if user is not signed in
 		const timer = setTimeout(() => {
-			if (!currentUser && !localStorage.getItem('signInPromptDismissed')) {
-				setShowSignInPrompt(true);
+			try {
+				if (!currentUser && !localStorage.getItem('signInPromptDismissed')) {
+					setShowSignInPrompt(true);
+				}
+			} catch (error) {
+				// Handle cases where localStorage is not available (SSR, private browsing)
+				console.log('localStorage not available:', error);
 			}
 		}, 3000);
 
@@ -25,7 +30,12 @@ const HomeContent = () => {
 
 	const handleCloseSignInPrompt = () => {
 		setShowSignInPrompt(false);
-		localStorage.setItem('signInPromptDismissed', 'true');
+		try {
+			localStorage.setItem('signInPromptDismissed', 'true');
+		} catch (error) {
+			// Handle cases where localStorage is not available
+			console.log('localStorage not available:', error);
+		}
 	};
 
 	return (

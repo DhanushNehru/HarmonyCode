@@ -21,16 +21,13 @@ import {
 	GiViolin,
 	GiDrumKit,
 	GiMicrophone,
-	GiMusicNote,
 	GiSpeaker,
 	GiHeadphones,
-	GiVinylRecord,
-	GiConcertina,
 	GiSaxophone,
 	GiTrumpet,
 	GiHarp
 } from 'react-icons/gi';
-import { FaUmbrellaBeach, FaMusic, FaCompactDisc, FaRadio } from 'react-icons/fa';
+import { FaUmbrellaBeach, FaMusic, FaCompactDisc } from 'react-icons/fa';
 import {
 	RiSailboatLine,
 	RiLeafLine,
@@ -118,17 +115,13 @@ const Cards = () => {
 		{ title: "Violin", icon: GiViolin },
 		{ title: "Drums", icon: GiDrumKit },
 		{ title: "Microphone", icon: GiMicrophone },
-		{ title: "Music Note", icon: GiMusicNote },
 		{ title: "Speaker", icon: GiSpeaker },
 		{ title: "Headphones", icon: GiHeadphones },
-		{ title: "Vinyl", icon: GiVinylRecord },
-		{ title: "Concertina", icon: GiConcertina },
 		{ title: "Saxophone", icon: GiSaxophone },
 		{ title: "Trumpet", icon: GiTrumpet },
 		{ title: "Harp", icon: GiHarp },
 		{ title: "Music", icon: FaMusic },
 		{ title: "Compact Disc", icon: FaCompactDisc },
-		{ title: "Radio", icon: FaRadio },
 		{ title: "Music 2", icon: RiMusic2Line },
 		{ title: "Sound Module", icon: RiSoundModuleLine },
 		{ title: "Equalizer", icon: RiEqualizerLine },

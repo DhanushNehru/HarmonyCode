@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 
 import { useAuth } from '../context/AuthContext.js';
+import { COLOR_PALETTE } from '../constants/colors.js';
 
 import { Slider } from '@mui/material';
 
@@ -36,23 +37,10 @@ const Card = ({ title, Icon, onPlayStateChange,singleMode, playingCard, handlePl
     }
   }, [playingCard, singleMode]);
 
-  const colors = [
-    '#6366f1', // Indigo
-    '#8b5cf6', // Violet
-    '#ec4899', // Pink
-    '#f59e0b', // Amber
-    '#10b981', // Emerald
-    '#3b82f6', // Blue
-    '#ef4444', // Red
-    '#06b6d4', // Cyan
-    '#84cc16', // Lime
-    '#f97316', // Orange
-  ];
-
   // function to generate random color
   const getRandomColor = () => {
-    const randomIndex = Math.floor(Math.random() * colors.length);
-    return colors[randomIndex];
+    const randomIndex = Math.floor(Math.random() * COLOR_PALETTE.length);
+    return COLOR_PALETTE[randomIndex];
   };
 
   // invoking random color function
