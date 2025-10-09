@@ -15,14 +15,27 @@ import {
 	GiWaterfall,
 	GiRoad,
 	GiFlute,
-	GiCuckooClock
+	GiCuckooClock,
+	GiGuitar,
+	GiPianoKeys,
+	GiViolin,
+	GiDrumKit,
+	GiMicrophone,
+	GiSpeaker,
+	GiHeadphones,
+	GiSaxophone,
+	GiTrumpet,
+	GiHarp
 } from 'react-icons/gi';
-import { FaUmbrellaBeach } from 'react-icons/fa';
+import { FaUmbrellaBeach, FaMusic, FaCompactDisc } from 'react-icons/fa';
 import {
 	RiSailboatLine,
 	RiLeafLine,
 	RiRocketLine,
-	RiFootprintLine
+	RiFootprintLine,
+	RiMusic2Line,
+	RiSoundModuleLine,
+	RiEqualizerLine
 } from 'react-icons/ri';
 import {
 	BsBook,
@@ -33,18 +46,23 @@ import {
 	BsSunglasses,
 	BsCloudSnow,
 	BsTropicalStorm,
-	BsTelephone
+	BsTelephone,
+	BsMusicNoteBeamed,
+	BsSoundwave,
+	BsVolumeUp
 } from 'react-icons/bs';
 import {
 	AiOutlineClockCircle,
 	AiOutlineThunderbolt,
 	AiOutlineTrophy,
-	AiOutlineQuestion
+	AiOutlineQuestion,
+	AiOutlineSound
 } from 'react-icons/ai';
 import { ImSigma } from 'react-icons/im';
 import {
 	BiCloudRain,
-	BiTrain
+	BiTrain,
+	BiMusic
 } from 'react-icons/bi';
 import { FaHelicopter, FaGhost, FaStop } from 'react-icons/fa';
 import { useTransition, animated } from "@react-spring/web";
@@ -90,7 +108,28 @@ const Cards = () => {
 		{ title: "Thunder", icon: AiOutlineThunderbolt },
 		{ title: "Train", icon: BiTrain },
 		{ title: "Victory", icon: AiOutlineTrophy },
-		{ title: "Wildcard", icon: AiOutlineQuestion }
+		{ title: "Wildcard", icon: AiOutlineQuestion },
+		// New Music-themed components
+		{ title: "Guitar", icon: GiGuitar },
+		{ title: "Piano", icon: GiPianoKeys },
+		{ title: "Violin", icon: GiViolin },
+		{ title: "Drums", icon: GiDrumKit },
+		{ title: "Microphone", icon: GiMicrophone },
+		{ title: "Speaker", icon: GiSpeaker },
+		{ title: "Headphones", icon: GiHeadphones },
+		{ title: "Saxophone", icon: GiSaxophone },
+		{ title: "Trumpet", icon: GiTrumpet },
+		{ title: "Harp", icon: GiHarp },
+		{ title: "Music", icon: FaMusic },
+		{ title: "Compact Disc", icon: FaCompactDisc },
+		{ title: "Music 2", icon: RiMusic2Line },
+		{ title: "Sound Module", icon: RiSoundModuleLine },
+		{ title: "Equalizer", icon: RiEqualizerLine },
+		{ title: "Music Note Beamed", icon: BsMusicNoteBeamed },
+		{ title: "Soundwave", icon: BsSoundwave },
+		{ title: "Volume Up", icon: BsVolumeUp },
+		{ title: "Sound", icon: AiOutlineSound },
+		{ title: "Music 3", icon: BiMusic }
 	];
 
 	const handlePlay = (title) => {

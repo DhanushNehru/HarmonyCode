@@ -1,10 +1,53 @@
 import Head from "next/head";
+import { useState, useEffect } from "react";
 
 import Header from "../components/Header";
 import Cards from "../components/Cards";
 import Footer from "../components/Footer";
 import ThemeToggler from "../components/ThemeToggler";
-import { AuthProvider } from "../context/AuthContext";
+import SignInPrompt from "../components/SignInPrompt";
+import { AuthProvider, useAuth } from "../context/AuthContext";
+
+const HomeContent = () => {
+	const [showSignInPrompt, setShowSignInPrompt] = useState(false);
+	const { currentUser } = useAuth();
+
+	useEffect(() => {
+		// Show sign-in prompt after 3 seconds if user is not signed in
+		const timer = setTimeout(() => {
+			try {
+				if (!currentUser && !localStorage.getItem('signInPromptDismissed')) {
+					setShowSignInPrompt(true);
+				}
+			} catch (error) {
+				// Handle cases where localStorage is not available (SSR, private browsing)
+				console.log('localStorage not available:', error);
+			}
+		}, 3000);
+
+		return () => clearTimeout(timer);
+	}, [currentUser]);
+
+	const handleCloseSignInPrompt = () => {
+		setShowSignInPrompt(false);
+		try {
+			localStorage.setItem('signInPromptDismissed', 'true');
+		} catch (error) {
+			// Handle cases where localStorage is not available
+			console.log('localStorage not available:', error);
+		}
+	};
+
+	return (
+		<div>
+			<Header />
+			<Cards />
+			<Footer />
+			<ThemeToggler />
+			{showSignInPrompt && <SignInPrompt onClose={handleCloseSignInPrompt} />}
+		</div>
+	);
+};
 
 const Home = () => {
 	return (
@@ -46,13 +89,7 @@ const Home = () => {
 				<link rel="icon" href="/favicon.webp" />
 			</Head>
 
-			<Header />
-
-			<Cards />
-
-			<Footer />
-
-			<ThemeToggler />
+			<HomeContent />
 			</AuthProvider>
 		</div>
 	);
