@@ -36,7 +36,7 @@ const Header = () => {
   const toggleUserMenu = () => setIsUserMenuOpen(!isUserMenuOpen);
 
   return (
-    <header className="w-full bg-[#fafafa] shadow-sm p-2 dark:bg-[#1a1a1a]">
+    <header className="w-full bg-gradient-to-r from-purple-50 to-pink-50 shadow-sm p-2 dark:bg-gradient-to-r dark:from-gray-900 dark:to-gray-800">
       <div className="max-w-6xl mx-auto flex items-center justify-between">
         {/* Logo */}
         <h1 className="font-bold text-md md:text-2xl lg:text-2xl text-gray-700 dark:text-gray-300">
@@ -47,12 +47,19 @@ const Header = () => {
         <div className="hidden md:flex items-center space-x-2">
           {currentUser ? (
             <>
-              <span className="font-bold text-gray-800 dark:text-white">
-                Welcome, {currentUser.displayName}
-              </span>
+              <div className="flex items-center space-x-3">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
+                  <span className="text-white font-bold text-sm">
+                    {currentUser.displayName ? currentUser.displayName.charAt(0).toUpperCase() : currentUser.email.charAt(0).toUpperCase()}
+                  </span>
+                </div>
+                <span className="font-bold text-gray-800 dark:text-white">
+                  Welcome, {currentUser.displayName || currentUser.email.split('@')[0]}
+                </span>
+              </div>
               <button
                 onClick={handleSignOut}
-                className="font-bold text-gray-700 dark:text-white border border-gray-300 rounded-md px-2 py-1 bg-white hover:bg-gray-100 dark:bg-black dark:border-gray-500"
+                className="font-bold text-gray-700 dark:text-white border border-gray-300 rounded-md px-3 py-2 bg-white hover:bg-gray-100 dark:bg-black dark:border-gray-500 transition-all duration-200 hover:shadow-md"
               >
                 Logout
               </button>
@@ -113,27 +120,22 @@ const Header = () => {
         <div className="md:hidden mt-2 py-2 bg-white dark:bg-gray-800 rounded-md shadow-lg">
           {currentUser ? (
             <div className="px-4 py-2">
-              <div
-                onClick={toggleUserMenu}
-                className="flex justify-between items-center cursor-pointer"
-              >
+              <div className="flex items-center space-x-3 mb-3">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
+                  <span className="text-white font-bold text-sm">
+                    {currentUser.displayName ? currentUser.displayName.charAt(0).toUpperCase() : currentUser.email.charAt(0).toUpperCase()}
+                  </span>
+                </div>
                 <span className="font-bold text-gray-800 dark:text-white">
-                  {currentUser.displayName}
+                  {currentUser.displayName || currentUser.email.split('@')[0]}
                 </span>
-                {isUserMenuOpen ? (
-                  <ChevronUp className="text-gray-700 dark:text-white" />
-                ) : (
-                  <ChevronDown className="text-gray-700 dark:text-white" />
-                )}
               </div>
-              {isUserMenuOpen && (
-                <button
-                  onClick={handleSignOut}
-                  className="mt-2 w-full text-left font-bold text-gray-700 dark:text-white"
-                >
-                  Logout
-                </button>
-              )}
+              <button
+                onClick={handleSignOut}
+                className="w-full text-left font-bold text-gray-700 dark:text-white border border-gray-300 rounded-md px-3 py-2 bg-white hover:bg-gray-100 dark:bg-black dark:border-gray-500 transition-all duration-200"
+              >
+                Logout
+              </button>
             </div>
           ) : (
             <div className="px-4 py-2 space-y-2">

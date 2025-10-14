@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 
 import { useAuth } from '../context/AuthContext.js';
+import { COLOR_PALETTE } from '../constants/colors.js';
 
 import { Slider } from '@mui/material';
 
@@ -36,23 +37,10 @@ const Card = ({ title, Icon, onPlayStateChange,singleMode, playingCard, handlePl
     }
   }, [playingCard, singleMode]);
 
-  const colors = [
-    '#00ccff', // Electric Blue
-    '#33ff33', // Neon Green
-    '#ff3399', // Vibrant Pink
-    '#cc33ff', // Electric Purple
-    '#ff9933', // Radiant Orange
-    '#FFD700', // Gold
-    '#ff3333', // Fiery Red
-    '#00ffff', // Aqua Blue
-    '#33cc33', // Brilliant Green
-    '#ff66cc', // Hot Pink
-  ];
-
   // function to generate random color
   const getRandomColor = () => {
-    const randomIndex = Math.floor(Math.random() * colors.length);
-    return colors[randomIndex];
+    const randomIndex = Math.floor(Math.random() * COLOR_PALETTE.length);
+    return COLOR_PALETTE[randomIndex];
   };
 
   // invoking random color function
@@ -133,8 +121,8 @@ const Card = ({ title, Icon, onPlayStateChange,singleMode, playingCard, handlePl
 
   return (
     <div
-      className={`relative bg-white p-4 rounded-2xl w-[240px] h-[220px] shadow-lg hover:shadow-2xl hover:bg-gray-200 hover:translate-y-1 cursor-pointer transition-all duration-150 flex flex-col space-y-4 dark:bg-[#252424] hover:dark:bg-[black] ${
-        isPlaying && 'border-4 border-blue-500'
+      className={`relative bg-white p-4 rounded-2xl w-[240px] h-[220px] shadow-lg hover:shadow-2xl hover:bg-gradient-to-br hover:from-gray-50 hover:to-gray-100 hover:translate-y-[-4px] hover:scale-105 cursor-pointer transition-all duration-300 ease-out flex flex-col space-y-4 dark:bg-[#252424] hover:dark:bg-gradient-to-br hover:dark:from-gray-800 hover:dark:to-gray-900 ${
+        isPlaying && 'border-4 border-blue-500 ring-4 ring-blue-200 dark:ring-blue-800'
       }`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -142,20 +130,22 @@ const Card = ({ title, Icon, onPlayStateChange,singleMode, playingCard, handlePl
     >
       <div onClick={startStopSound} className="h-full">
         <h3
-          className="text-gray-500 dark:text-gray-200"
+          className="text-gray-600 dark:text-gray-200 font-semibold text-lg"
           style={{
-            transition: 'all 0.2s ease-in-out',
-            color: isHovered && randomColor,
+            transition: 'all 0.3s ease-in-out',
+            color: isHovered ? randomColor : undefined,
+            textShadow: isHovered ? `0 0 10px ${randomColor}40` : 'none',
           }}
         >
           {title}
         </h3>
 
         <Icon
-          className="text-gray-500 w-full h-1/2 mt-4"
+          className="text-gray-500 w-full h-1/2 mt-4 transition-all duration-300 ease-out"
           style={{
-            transition: 'all 0.2s ease-in-out',
-            color: isHovered && randomColor,
+            color: isHovered ? randomColor : undefined,
+            transform: isHovered ? 'scale(1.1) rotate(5deg)' : 'scale(1) rotate(0deg)',
+            filter: isHovered ? `drop-shadow(0 0 8px ${randomColor}60)` : 'none',
           }}
         />
       </div>

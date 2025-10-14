@@ -3,19 +3,28 @@ import { getAuth, GoogleAuthProvider, GithubAuthProvider, signInWithPopup } from
 import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_API_KEY,
-  authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
-  projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_APP_ID,
-  measurementId: process.env.NEXT_PUBLIC_APP_MEASUREMENT_ID,
+  apiKey: process.env.NEXT_PUBLIC_API_KEY || "placeholder-api-key",
+  authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN || "placeholder-project.firebaseapp.com",
+  projectId: process.env.NEXT_PUBLIC_PROJECT_ID || "placeholder-project",
+  storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET || "placeholder-project.appspot.com",
+  messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID || "123456789",
+  appId: process.env.NEXT_PUBLIC_APP_ID || "1:123456789:web:placeholder",
+  measurementId: process.env.NEXT_PUBLIC_APP_MEASUREMENT_ID || "G-PLACEHOLDER",
 };
 
-const app = initializeApp(firebaseConfig);
+// Only initialize Firebase if we have valid configuration
+let app, auth, db;
 
-const auth = getAuth(app);
-const db = getFirestore(app);
+try {
+  app = initializeApp(firebaseConfig);
+  auth = getAuth(app);
+  db = getFirestore(app);
+} catch (error) {
+  console.warn('Firebase initialization failed:', error);
+  // Create mock objects for development
+  auth = null;
+  db = null;
+}
 
 export { auth, GoogleAuthProvider, GithubAuthProvider, signInWithPopup, db };
 
