@@ -253,7 +253,7 @@ Example output format: "Rain, Waterfall, Forest, Birds, Ocean"`,
         🤖 AI Sound Recommendation
       </h1>
       <p className="text-center text-base text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
-        Our AI-based Sound Recommendation gives you the picks of your choices based on our available cards
+        Our AI-based Sound Recommendation suggests sounds tailored to your preferences from our available cards
       </p>
       
       <div className="flex items-center justify-center gap-4 my-8">

@@ -18,7 +18,7 @@ body {
 }
 
 .typing-animation {
-	animation: typing 2s ease-in-out;
+	animation: typing 2s ease-in-out infinite;
 	font-weight: 600;
 }
 

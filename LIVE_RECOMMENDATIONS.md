@@ -6,9 +6,9 @@ The AI Sound Recommendation section now includes a **live rotating suggestion** 
 ## 🎯 Features
 
 ### 1. Live Rotating Suggestions
-- **10 random sounds** are selected on component mount
-- Rotates through them **every 2 seconds**
-- Displays in the search box as dynamic placeholder
+- **7 predefined categories** are rotated through
+- Categories change **every 2 seconds**
+- Displays in the search box as dynamic overlay text with typing animation
 
 ### 2. Visual Elements
 
@@ -45,23 +45,26 @@ The AI Sound Recommendation section now includes a **live rotating suggestion** 
 
 ### State Management
 ```javascript
-const [liveRecommendations, setLiveRecommendations] = useState([]);
-const [currentLiveIndex, setCurrentLiveIndex] = useState(0);
+const [currentCategory, setCurrentCategory] = useState(0);
+const categories = [
+  "Work music", "Peaceful music", "Sleeping music", 
+  "Nature music", "Musical instruments", "Weather", "Meditation music"
+];
 ```
 
 ### Initialization
-- Shuffles all available sounds
-- Selects first 10 randomly
-- Ensures variety on each page load
+- Predefined category list for consistency
+- Rotates through categories in order
+- Provides diverse search suggestions
 
 ### Rotation Logic
 ```javascript
 useEffect(() => {
   const interval = setInterval(() => {
-    setCurrentLiveIndex((prevIndex) => (prevIndex + 1) % liveRecommendations.length);
+    setCurrentCategory((prev) => (prev + 1) % categories.length);
   }, 2000); // 2 seconds
   return () => clearInterval(interval);
-}, [liveRecommendations]);
+}, []);
 ```
 
 ### Animation Config
@@ -94,15 +97,15 @@ useEffect(() => {
 ## 📊 Performance
 
 ### Optimization
-- ✅ Uses React.createElement for dynamic icon rendering
+- ✅ Predefined category strings (no dynamic allocation)
 - ✅ Cleanup function prevents memory leaks
 - ✅ Conditional rendering (only shows when not typing)
-- ✅ Memoized transitions
+- ✅ Smooth React Spring transitions
 
 ### Memory Usage
-- ~10 sound objects in memory
+- 7 category strings in memory
 - Minimal re-renders (only on interval tick)
-- Efficient icon component mounting
+- Lightweight text-based animation
 
 ## 🔮 Future Enhancements
 
@@ -125,9 +128,9 @@ Potential improvements:
 
 ### For Developers
 1. Adjust rotation speed in `setInterval` (currently 2000ms)
-2. Change number of suggestions in `.slice(0, 10)`
-3. Modify animation in `liveTransition` config
-4. Customize colors in className props
+2. Modify categories array to add/remove suggestions
+3. Update animation in `liveTransition` config
+4. Customize colors and typing animation in CSS/className props
 
 ## 🐛 Troubleshooting
 
@@ -141,18 +144,18 @@ Potential improvements:
 - Balance between visibility and distraction
 
 ### Performance issues
-- Reduce number of suggestions (currently 10)
+- Reduce number of categories (currently 7)
 - Simplify animation config
-- Add shouldComponentUpdate checks
+- Add React.memo if needed for complex parent renders
 
 ## 📋 Code Structure
 
 ### Key Components
-1. **State initialization** (useEffect on mount)
-2. **Rotation timer** (useEffect with interval)
-3. **Animation transition** (useTransition hook)
-4. **Conditional rendering** (shows only when idle)
-5. **Progress indicators** (mapped dots)
+1. **Category rotation** (useEffect with interval)
+2. **Animation transitions** (useTransition hook)
+3. **Conditional rendering** (shows only when search is empty)
+4. **Clickable category pills** (direct search functionality)
+5. **Typing animation** (CSS keyframes with infinite loop)
 
 ### Files Modified
 - `components/AiRecommendation.js` - Main implementation

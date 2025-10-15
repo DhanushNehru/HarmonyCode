@@ -2,6 +2,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { GoogleAuthProvider, GithubAuthProvider, auth, signInWithPopup } from "../components/firebase";
 import { signOut, onAuthStateChanged } from "firebase/auth";
+import { showNotification } from "../utils/notifications";
 
 const AuthContext = React.createContext();
 
@@ -15,7 +16,7 @@ export function AuthProvider({ children }) {
   const googleSignIn = ()=>{
     if (!auth) {
       console.error('Firebase auth is not initialized. Please check your Firebase configuration.');
-      alert('Authentication is not available. Please check the console for details.');
+      showNotification('Authentication is not available. Please check your configuration.', 'error');
       return;
     }
     const provider = new GoogleAuthProvider();
@@ -25,7 +26,7 @@ export function AuthProvider({ children }) {
   const githubSignIn = ()=>{
     if (!auth) {
       console.error('Firebase auth is not initialized. Please check your Firebase configuration.');
-      alert('Authentication is not available. Please check the console for details.');
+      showNotification('Authentication is not available. Please check your configuration.', 'error');
       return;
     }
     const provider = new GithubAuthProvider();

@@ -2,7 +2,6 @@
 // Run this to see which models your API key has access to
 
 require('dotenv').config({ path: '.env.local' });
-const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 async function listModels() {
   const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
