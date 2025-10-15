@@ -2,11 +2,13 @@ import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider, GithubAuthProvider, signInWithPopup } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
-// Debug: Log environment variables (remove this in production)
-console.log('🔍 Checking Firebase environment variables:');
-console.log('API Key exists:', !!process.env.NEXT_PUBLIC_FIREBASE_API_KEY);
-console.log('Auth Domain:', process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN);
-console.log('Project ID:', process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID);
+// Debug: Log environment variables (only in development)
+if (process.env.NODE_ENV !== 'production') {
+  console.log('🔍 Checking Firebase environment variables:');
+  console.log('API Key exists:', !!process.env.NEXT_PUBLIC_FIREBASE_API_KEY);
+  console.log('Auth Domain:', process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN);
+  console.log('Project ID:', process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID);
+}
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "placeholder-api-key",

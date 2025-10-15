@@ -12,21 +12,17 @@ The AI Sound Recommendation section now includes a **live rotating suggestion** 
 
 ### 2. Visual Elements
 
-#### Animated Icon
-- Shows the sound's icon on the left side of search box
-- Smoothly transitions between sounds
-- Color: Blue theme (matches the design)
-
-#### Dynamic Placeholder
-- Changes to show current suggested sound
-- Format: `Try: "Forest"...`, `Try: "Rain"...`, etc.
+#### Dynamic Category Suggestions
+- Shows rotating category suggestions as overlay text
+- Format: `Try: Work music`, `Try: Peaceful music`, etc.
+- Typing animation with blinking cursor effect
 - Disappears when user starts typing
 
-#### Progress Indicators
-- Animated dots below search box
-- Shows current position (e.g., 3/10)
-- Active dot expands, others are small
-- Smooth transitions
+#### Category Pills
+- Clickable suggestion buttons below search
+- Highlight current rotating category
+- Direct click-to-search functionality
+- Responsive design with hover effects
 
 ### 3. User Experience
 
@@ -112,12 +108,12 @@ useEffect(() => {
 
 Potential improvements:
 - [ ] Pause rotation on search box focus
-- [ ] Click suggestion to auto-fill search
-- [ ] Categorize suggestions (peaceful, work, etc.)
+- [x] Click suggestion to auto-fill search (implemented as category pills)
+- [x] Categorize suggestions (peaceful, work, etc.) - implemented
 - [ ] User preference for rotation speed
 - [ ] Disable rotation option
-- [ ] Show sound count (e.g., "1 of 10")
 - [ ] Preview sound on hover
+- [ ] Animated icons for each category
 
 ## 💡 Usage Tips
 

@@ -13,7 +13,7 @@ async function listModels() {
     process.exit(1);
   }
 
-  console.log("🔑 Using API Key:", apiKey.substring(0, 20) + "...");
+  console.log("🔑 Using API Key (hidden for security)");
   console.log("\n📋 Fetching available models...\n");
 
   try {

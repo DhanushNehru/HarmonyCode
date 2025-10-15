@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { useTransition, animated } from "@react-spring/web";
 import Card from "./Card";
+import { GEMINI_CONFIG, getGeminiModelId } from "../constants/gemini";
+import { getRandomSelection } from "../utils/shuffle";
 import {
   GiBattleAxe,
   GiBirdTwitter,
@@ -56,22 +58,21 @@ const AiRecommendation = ({ data }) => {
   const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY);
 
   const model = genAI.getGenerativeModel({
-    model: "gemini-2.5-pro-preview-03-25", // Gemini 2.5 Pro Preview - Most advanced
+    model: getGeminiModelId(),
   });
-
-  const generationConfig = {
-    temperature: 1,
-    topP: 0.95,
-    topK: 64,
-    maxOutputTokens: 8192,
-    responseMimeType: "text/plain",
-  };
   
-  async function run() {
+  async function run(searchQuery = null) {
+    const queryToUse = searchQuery || search;
+    
     // Validate search input
-    if (!search || search.trim().length === 0) {
+    if (!queryToUse || queryToUse.trim().length === 0) {
       setError("Please enter a search query");
       return;
+    }
+
+    // Update search state if query was passed directly
+    if (searchQuery && searchQuery !== search) {
+      setSearch(searchQuery);
     }
 
     // Clear previous error and set loading
@@ -80,7 +81,7 @@ const AiRecommendation = ({ data }) => {
 
     try {
       const chatSession = model.startChat({
-        generationConfig,
+        generationConfig: GEMINI_CONFIG.GENERATION_CONFIG,
         history: [
           {
             role: "user",
@@ -115,10 +116,10 @@ Example output format: "Rain, Waterfall, Forest, Birds, Ocean"`,
         ],
       });
 
-      const result = await chatSession.sendMessage(search);
+      const result = await chatSession.sendMessage(queryToUse);
       const response = await result.response.text();
       console.log('✅ AI Response:', response);
-      console.log('🔍 User Search Query:', search);
+      console.log('🔍 User Search Query:', queryToUse);
       
       // Clean up the response - remove quotes, newlines, and extra spaces
       let cleanedText = response
@@ -156,7 +157,7 @@ Example output format: "Rain, Waterfall, Forest, Birds, Ocean"`,
       }
 
       if (filteredRecommendations.length === 0) {
-        setError(`No matching sounds found for "${search}". Try terms like: peaceful, work, focus, sleep, nature, energetic`);
+        setError(`No matching sounds found for "${queryToUse}". Try terms like: peaceful, work, focus, sleep, nature, energetic`);
       } else {
         console.log(`✅ Found ${filteredRecommendations.length} matching sounds`);
       }
@@ -181,7 +182,7 @@ Example output format: "Rain, Waterfall, Forest, Birds, Ocean"`,
   }
 
   // Handle Enter key press in search input
-  const handleKeyPress = (e) => {
+  const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
       run();
     }
@@ -190,9 +191,8 @@ Example output format: "Rain, Waterfall, Forest, Birds, Ocean"`,
   // Initialize live recommendations on component mount
   useEffect(() => {
     if (data && data.length > 0) {
-      // Shuffle and pick 10 random sounds for live rotation
-      const shuffled = [...data].sort(() => Math.random() - 0.5);
-      const selectedSounds = shuffled.slice(0, 10);
+      // Use Fisher-Yates shuffle for unbiased random selection
+      const selectedSounds = getRandomSelection(data, 10);
       setLiveRecommendations(selectedSounds);
     }
   }, [data]);
@@ -265,15 +265,20 @@ Example output format: "Rain, Waterfall, Forest, Birds, Ocean"`,
               placeholder={search ? "" : " "}
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              onKeyPress={handleKeyPress}
+              onKeyDown={handleKeyDown}
               disabled={loading}
+              aria-label="Search sounds"
+              aria-describedby={!search ? "search-suggestion" : undefined}
               className="p-4 pr-14 rounded-[6px] w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 disabled:opacity-50 focus:outline-none transition-colors text-lg border-0"
               style={{ caretColor: '#3B82F6' }}
             />
             
             {/* Animated category text overlay when empty */}
             {!search && (
-              <div className="absolute left-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
+              <div 
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 pointer-events-none"
+                id="search-suggestion"
+              >
                 <div className="flex items-center gap-2">
                   <span className="text-gray-400 text-lg">Try:</span>
                   <div className="min-w-[200px] relative h-7">
@@ -314,10 +319,7 @@ Example output format: "Rain, Waterfall, Forest, Birds, Ocean"`,
         {categories.map((category, index) => (
           <button
             key={index}
-            onClick={() => {
-              setSearch(category);
-              setTimeout(() => run(), 100);
-            }}
+            onClick={() => run(category)}
             disabled={loading}
             className={`px-4 py-2 rounded-full text-sm font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed ${
               currentCategory === index
