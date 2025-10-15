@@ -5,7 +5,13 @@
 		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
-		"lint": "next lint"
+		"lint": "next lint",
+		"build:analyze": "ANALYZE=true npm run build",
+		"check-env": "node -e \"require('./utils/validateEnv').validateEnvironment()\"",
+		"predev": "npm run check-env",
+		"prebuild": "npm run check-env",
+		"prepush-check": "npm run lint && npm run build",
+		"prepare": "husky"
 	},
 	"dependencies": {
 		"@emotion/react": "^11.10.0",
@@ -21,14 +27,15 @@
 		"next": "^15.5.5",
 		"next-share": "^0.27.0",
 		"next-themes": "^0.2.0",
-		"react": "^19.2.0",
-		"react-dom": "^19.2.0",
+		"react": "^18.3.1",
+		"react-dom": "^18.3.1",
 		"react-icons": "^4.4.0"
 	},
 	"devDependencies": {
 		"autoprefixer": "^10.4.8",
 		"eslint": "8.21.0",
 		"eslint-config-next": "12.2.4",
+		"husky": "^8.0.3",
 		"postcss": "^8.4.16",
 		"tailwindcss": "^3.1.8"
 	}

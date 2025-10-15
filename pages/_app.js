@@ -1,12 +1,17 @@
 import '../styles/globals.css';
-
 import { ThemeProvider } from 'next-themes';
+import { AuthProvider } from '../context/AuthContext';
+import ErrorBoundary from '../components/ErrorBoundary';
 
 const MyApp = ({ Component, pageProps }) => {
 	return (
-		<ThemeProvider attribute="class">
-			<Component {...pageProps} />
-		</ThemeProvider>
+		<ErrorBoundary>
+			<ThemeProvider attribute="class">
+				<AuthProvider>
+					<Component {...pageProps} />
+				</AuthProvider>
+			</ThemeProvider>
+		</ErrorBoundary>
 	)
 }
 

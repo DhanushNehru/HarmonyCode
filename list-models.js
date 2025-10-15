@@ -16,8 +16,6 @@ async function listModels() {
   console.log("\n📋 Fetching available models...\n");
 
   try {
-    const genAI = new GoogleGenerativeAI(apiKey);
-    
     // Try to list models using the API
     const response = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`

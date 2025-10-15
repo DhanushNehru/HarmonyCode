@@ -3,7 +3,6 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { useTransition, animated } from "@react-spring/web";
 import Card from "./Card";
 import { GEMINI_CONFIG, getGeminiModelId } from "../constants/gemini";
-import { getRandomSelection } from "../utils/shuffle";
 import {
   GiBattleAxe,
   GiBirdTwitter,
@@ -53,13 +52,22 @@ const AiRecommendation = ({ data }) => {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [liveRecommendations, setLiveRecommendations] = useState([]);
-  const [currentLiveIndex, setCurrentLiveIndex] = useState(0);
-  const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY);
-
-  const model = genAI.getGenerativeModel({
-    model: getGeminiModelId(),
-  });
+  
+  // Initialize Gemini AI with error handling
+  let genAI, model;
+  try {
+    if (!process.env.NEXT_PUBLIC_GEMINI_API_KEY) {
+      throw new Error('Gemini API key is missing');
+    }
+    genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY);
+    model = genAI.getGenerativeModel({
+      model: getGeminiModelId(),
+    });
+  } catch (initError) {
+    if (process.env.NODE_ENV !== 'production') {
+      console.error('❌ Gemini AI initialization failed:', initError.message);
+    }
+  }
   
   async function run(searchQuery = null) {
     const queryToUse = searchQuery || search;
@@ -67,6 +75,12 @@ const AiRecommendation = ({ data }) => {
     // Validate search input
     if (!queryToUse || queryToUse.trim().length === 0) {
       setError("Please enter a search query");
+      return;
+    }
+
+    // Check if AI is available
+    if (!model) {
+      setError("AI recommendations are currently unavailable. Please try again later.");
       return;
     }
 
@@ -118,8 +132,11 @@ Example output format: "Rain, Waterfall, Forest, Birds, Ocean"`,
 
       const result = await chatSession.sendMessage(queryToUse);
       const response = await result.response.text();
-      console.log('✅ AI Response:', response);
-      console.log('🔍 User Search Query:', queryToUse);
+      
+      if (process.env.NODE_ENV !== 'production') {
+        console.log('✅ AI Response:', response);
+        console.log('🔍 User Search Query:', queryToUse);
+      }
       
       // Clean up the response - remove quotes, newlines, and extra spaces
       let cleanedText = response
@@ -133,7 +150,9 @@ Example output format: "Rain, Waterfall, Forest, Birds, Ocean"`,
         .map((title) => title.trim())
         .filter((title) => title.length > 0); // Remove empty strings
       
-      console.log('🎯 Parsed Titles:', cleanedResponse);
+      if (process.env.NODE_ENV !== 'production') {
+        console.log('🎯 Parsed Titles:', cleanedResponse);
+      }
       
       // Try exact match first
       let filteredRecommendations = data.filter((item) => 
@@ -142,7 +161,9 @@ Example output format: "Rain, Waterfall, Forest, Birds, Ocean"`,
       
       // If no exact matches, try case-insensitive partial matching
       if (filteredRecommendations.length === 0) {
-        console.log('⚠️ No exact matches, trying partial matching...');
+        if (process.env.NODE_ENV !== 'production') {
+          console.log('⚠️ No exact matches, trying partial matching...');
+        }
         filteredRecommendations = data.filter((item) => 
           cleanedResponse.some(title => 
             item.title.toLowerCase().includes(title.toLowerCase()) ||
@@ -159,7 +180,9 @@ Example output format: "Rain, Waterfall, Forest, Birds, Ocean"`,
       if (filteredRecommendations.length === 0) {
         setError(`No matching sounds found for "${queryToUse}". Try terms like: peaceful, work, focus, sleep, nature, energetic`);
       } else {
-        console.log(`✅ Found ${filteredRecommendations.length} matching sounds`);
+        if (process.env.NODE_ENV !== 'production') {
+          console.log(`✅ Found ${filteredRecommendations.length} matching sounds`);
+        }
       }
 
       setRecommendation(filteredRecommendations);
@@ -188,25 +211,7 @@ Example output format: "Rain, Waterfall, Forest, Birds, Ocean"`,
     }
   };
 
-  // Initialize live recommendations on component mount
-  useEffect(() => {
-    if (data && data.length > 0) {
-      // Use Fisher-Yates shuffle for unbiased random selection
-      const selectedSounds = getRandomSelection(data, 10);
-      setLiveRecommendations(selectedSounds);
-    }
-  }, [data]);
 
-  // Rotate through live recommendations every 2 seconds
-  useEffect(() => {
-    if (liveRecommendations.length === 0) return;
-
-    const interval = setInterval(() => {
-      setCurrentLiveIndex((prevIndex) => (prevIndex + 1) % liveRecommendations.length);
-    }, 2000); // Change every 2 seconds
-
-    return () => clearInterval(interval);
-  }, [liveRecommendations]);
 
   const transition = useTransition(recommendation, {
     from: { opacity: 0.2 },

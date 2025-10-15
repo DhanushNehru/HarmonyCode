@@ -81,13 +81,6 @@ useEffect(() => {
 - **Border**: Gray with dark mode support
 - **Icon Size**: 24px (2xl in Tailwind)
 
-### Progress Dots
-- **Active**: 24px width, blue color
-- **Inactive**: 6px width, gray color
-- **Spacing**: 4px gap
-- **Height**: 6px
-- **Transition**: 300ms all properties
-
 ### Colors
 - **Primary**: Blue-500 / Blue-400 (dark mode)
 - **Background**: White / Gray-800
@@ -124,7 +117,7 @@ Potential improvements:
 1. **Watch the suggestions** for inspiration
 2. **Type directly** - placeholder disappears
 3. **Press Enter** or click Search button
-4. **Progress dots** show rotation status
+4. **Click category pills** for instant search
 
 ### For Developers
 1. Adjust rotation speed in `setInterval` (currently 2000ms)
