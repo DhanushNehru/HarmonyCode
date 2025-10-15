@@ -24,36 +24,20 @@ const firebaseConfig = {
 let app, auth, db;
 
 try {
-  // Validate required Firebase configuration
-  const requiredFields = ['apiKey', 'authDomain', 'projectId'];
-  const missingFields = requiredFields.filter(field => 
-    !firebaseConfig[field] || 
-    firebaseConfig[field].includes('placeholder')
-  );
-
-  if (missingFields.length > 0) {
-    throw new Error(`Missing Firebase configuration: ${missingFields.join(', ')}`);
+  // Check if we have a valid API key before initializing
+  if (!firebaseConfig.apiKey || firebaseConfig.apiKey === "placeholder-api-key") {
+    throw new Error('Firebase API key is missing. Please check your .env.local file.');
   }
   
   app = initializeApp(firebaseConfig);
   auth = getAuth(app);
   db = getFirestore(app);
   
-  if (process.env.NODE_ENV !== 'production') {
-    console.log('✅ Firebase initialized successfully');
-  }
+  console.log('✅ Firebase initialized successfully');
 } catch (error) {
-  const errorMsg = `Firebase initialization failed: ${error.message}`;
-  
-  if (process.env.NODE_ENV === 'production') {
-    // In production, log but don't expose details
-    console.error('Firebase configuration error');
-  } else {
-    console.error('❌', errorMsg);
-    console.error('📋 Please check your Firebase environment variables in .env.local');
-  }
-  
-  // Set to null for safety - components should handle this gracefully
+  console.error('❌ Firebase initialization failed:', error.message);
+  console.error('Please ensure your .env.local file contains valid Firebase credentials and restart the dev server.');
+  // Set to null for safety
   auth = null;
   db = null;
 }

@@ -3,6 +3,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { useTransition, animated } from "@react-spring/web";
 import Card from "./Card";
 import { GEMINI_CONFIG, getGeminiModelId } from "../constants/gemini";
+import { getRandomSelection } from "../utils/shuffle";
 import {
   GiBattleAxe,
   GiBirdTwitter,
@@ -52,22 +53,11 @@ const AiRecommendation = ({ data }) => {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  
-  // Initialize Gemini AI with error handling
-  let genAI, model;
-  try {
-    if (!process.env.NEXT_PUBLIC_GEMINI_API_KEY) {
-      throw new Error('Gemini API key is missing');
-    }
-    genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY);
-    model = genAI.getGenerativeModel({
-      model: getGeminiModelId(),
-    });
-  } catch (initError) {
-    if (process.env.NODE_ENV !== 'production') {
-      console.error('❌ Gemini AI initialization failed:', initError.message);
-    }
-  }
+  const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY);
+
+  const model = genAI.getGenerativeModel({
+    model: getGeminiModelId(),
+  });
   
   async function run(searchQuery = null) {
     const queryToUse = searchQuery || search;
@@ -75,12 +65,6 @@ const AiRecommendation = ({ data }) => {
     // Validate search input
     if (!queryToUse || queryToUse.trim().length === 0) {
       setError("Please enter a search query");
-      return;
-    }
-
-    // Check if AI is available
-    if (!model) {
-      setError("AI recommendations are currently unavailable. Please try again later.");
       return;
     }
 
