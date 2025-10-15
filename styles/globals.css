@@ -5,3 +5,51 @@
 body {
 	background-color: whitesmoke;
 }
+
+/* Typing animation for live suggestions */
+@keyframes typing {
+	0%, 100% { opacity: 1; }
+	50% { opacity: 0.5; }
+}
+
+@keyframes blink {
+	0%, 100% { opacity: 1; }
+	50% { opacity: 0; }
+}
+
+.typing-animation {
+	animation: typing 2s ease-in-out;
+	font-weight: 600;
+}
+
+.typing-animation::after {
+	content: '|';
+	animation: blink 1s infinite;
+	margin-left: 2px;
+	font-weight: 400;
+}
+
+/* Animated gradient border */
+@keyframes gradient-move {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+.animated-gradient-border {
+	background: linear-gradient(90deg, #3B82F6, #8B5CF6, #EC4899, #3B82F6, #8B5CF6);
+	background-size: 200% 100%;
+	animation: gradient-move 3s ease-in-out infinite;
+}
+
+.dark .animated-gradient-border {
+	background: linear-gradient(90deg, #60A5FA, #A78BFA, #F472B6, #60A5FA, #A78BFA);
+	background-size: 200% 100%;
+	animation: gradient-move 3s ease-in-out infinite;
+}
