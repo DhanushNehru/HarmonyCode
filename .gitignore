@@ -1,6 +1,8 @@
 node_modules
-package-lock.json
 node_modules/
+package-lock.json
 .env/
+.env.local
+.env*.local
 .next/
 .idea/
