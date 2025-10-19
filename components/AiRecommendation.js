@@ -106,28 +106,33 @@ const AiRecommendation = ({ data }) => {
   });
 
   return (
-    <div className="container mx-auto border border-white shadow-md rounded-xl">
-      <h1 className="text-3xl text-center p-2 text-gray-700 dark:text-gray-400">
+    <div className="container mx-auto rounded-xl border border-gray-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-md transition-colors duration-300 px-4 sm:px-6 py-4">
+      <h1 className="text-3xl font-semibold text-center p-2 text-gray-800 dark:text-gray-200 transition-colors duration-300">
         AI Recommendation
       </h1>
-      <div className="flex items-center justify-center gap-4 my-8">
+      <div className="flex items-center justify-center gap-3 sm:gap-4 my-6 sm:my-8">
         <input
           type="text"
           placeholder="Search"
           onChange={(e) => setSearch(e.target.value)}
-          className="border border-gray-400 p-2 rounded-md w-1/2"
+          onKeyDown={(e) => {
+            if (e.key === "Enter") run();
+          }}
+          aria-label="Search prompt for AI recommendation"
+          className="w-10/12 sm:w-1/2 rounded-lg border border-gray-300 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-gray-800 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 p-2.5 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:border-transparent transition-colors duration-300"
         />
         <button
-          className="bg-gray-700 dark:bg-gray-400 text-white p-2 rounded-md"
+          className="inline-flex items-center justify-center rounded-lg bg-gray-900 dark:bg-gray-200 text-white dark:text-gray-900 px-3 sm:px-4 py-2 shadow-sm hover:bg-gray-800 dark:hover:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 active:scale-[.98] transition-all duration-200"
           onClick={() => run()}
+          aria-label="Run AI search"
         >
           <BsSearch className="h-[1.5em]" />
         </button>
       </div>
-      <div className="flex flex-wrap items-center justify-center gap-4 my-8 w-[90%] mx-auto">
+      <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-5 my-6 sm:my-8 w-[92%] sm:w-[90%] mx-auto">
         {transition((style, card) => (
-          <animated.div style={style}>
-            <Card key={card.title} title={card.title} Icon={card.icon} />
+          <animated.div style={style} key={card.title}>
+            <Card title={card.title} Icon={card.icon} />
           </animated.div>
         ))}
       </div>
