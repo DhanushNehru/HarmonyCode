@@ -3,7 +3,6 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { useTransition, animated } from "@react-spring/web";
 import Card from "./Card";
 import { GEMINI_CONFIG, getGeminiModelId } from "../constants/gemini";
-import { getRandomSelection } from "../utils/shuffle";
 import {
   GiBattleAxe,
   GiBirdTwitter,
@@ -87,7 +86,7 @@ const AiRecommendation = ({ data }) => {
               {
                 text: `You are a sound recommendation expert. I have a list of available sounds with their titles.
 
-Available sounds data: ${JSON.stringify(data)}
+Available sounds titles: ${JSON.stringify(data.map(d => d.title))}
 
 Your task:
 1. Analyze the user's search query to understand their mood, activity, or preference

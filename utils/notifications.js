@@ -8,6 +8,10 @@ export const showNotification = (message, type = 'error') => {
     type === 'error' ? 'bg-red-500' : type === 'success' ? 'bg-green-500' : 'bg-blue-500'
   }`;
   toast.textContent = message;
+  // Accessibility: announce toast to screen readers
+  toast.setAttribute('role', 'status');
+  toast.setAttribute('aria-live', 'polite');
+  toast.setAttribute('aria-atomic', 'true');
   
   // Add to DOM
   document.body.appendChild(toast);
