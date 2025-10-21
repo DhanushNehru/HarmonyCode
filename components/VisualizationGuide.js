@@ -118,7 +118,7 @@ const VisualizationGuide = () => {
                 onClick={() => setIsOpen(false)}
                 className="w-full mt-4 bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg transition-colors duration-200"
               >
-                Got it! Let's visualize 🎵
+                Got it! Let&apos;s visualize 🎵
               </motion.button>
             </motion.div>
           </>

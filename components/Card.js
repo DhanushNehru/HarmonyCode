@@ -51,7 +51,7 @@ const Card = ({
         stopVisualization();
       }
     }
-  }, [playingCard, singleMode, isVisualizationEnabled]);
+  }, [playingCard, singleMode, isVisualizationEnabled, startVisualization, stopVisualization, title]);
 
   // function to generate random color
   const getRandomColor = () => {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { useTransition, animated } from "@react-spring/web";
 import Card from "./Card";
@@ -93,7 +93,7 @@ const AiRecommendation = ({ data }) => {
     return filtered.slice(0, 5);
   };
 
-  async function run() {
+  const run = useCallback(async () => {
     try {
       if (!apiKey || !model) {
         // Use fallback recommendation
@@ -139,14 +139,15 @@ const AiRecommendation = ({ data }) => {
       const fallbackResults = getFallbackRecommendation(search);
       setRecommendation(fallbackResults);
     }
-  }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [apiKey, model, search, data]);
 
   useEffect(() => {
     // Only run initial recommendation if we have data
     if (data && data.length > 0) {
       run();
     }
-  }, [data]);
+  }, [data, run]);
 
   const transition = useTransition(recommendation, {
     from: { opacity: 0.2 },

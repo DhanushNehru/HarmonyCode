@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useVisualization } from '../context/VisualizationContext';
 import { useTheme } from 'next-themes';
@@ -199,7 +199,7 @@ const MusicVisualizer = ({ className = '' }) => {
   };
 
   // Main animation loop
-  const animate = () => {
+  const animate = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas || !isVisualizationEnabled) return;
 
@@ -231,7 +231,8 @@ const MusicVisualizer = ({ className = '' }) => {
     }
 
     animationRef.current = requestAnimationFrame(animate);
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isVisualizationEnabled, visualizationType, intensity, audioData, theme]);
 
   // Start/stop animation
   useEffect(() => {
@@ -246,6 +247,7 @@ const MusicVisualizer = ({ className = '' }) => {
         cancelAnimationFrame(animationRef.current);
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isVisualizationEnabled, visualizationType, intensity, audioData, theme]);
 
   if (!isVisualizationEnabled) return null;

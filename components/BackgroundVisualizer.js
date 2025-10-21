@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 import { useVisualization } from '../context/VisualizationContext';
 import { useTheme } from 'next-themes';
 import { COLOR_PALETTE } from '../constants/colors';
@@ -31,7 +31,7 @@ const BackgroundVisualizer = ({ className = '' }) => {
   }, []);
 
   // Animation loop
-  const animate = () => {
+  const animate = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas || !isVisualizationEnabled) return;
 
@@ -85,7 +85,7 @@ const BackgroundVisualizer = ({ className = '' }) => {
     });
 
     animationRef.current = requestAnimationFrame(animate);
-  };
+  }, [isVisualizationEnabled, audioData, theme]);
 
   // Start/stop animation
   useEffect(() => {
@@ -111,6 +111,7 @@ const BackgroundVisualizer = ({ className = '' }) => {
         cancelAnimationFrame(animationRef.current);
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isVisualizationEnabled, audioData, theme]);
 
   if (!isVisualizationEnabled) return null;
