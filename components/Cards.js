@@ -144,12 +144,13 @@ const Cards = () => {
 
 	const playingCardsRef = useRef(new Set());
 	const stopAllRef = useRef(null);
-	const { currentUser } = useAuth();
+	const { currentUser, isFirebaseAvailable } = useAuth();
 	useEffect(() => {
-		if (!currentUser) {
+		// Only stop all sounds if Firebase is available and user is not signed in
+		if (isFirebaseAvailable && !currentUser) {
 			handleStopAll();
 		}
-	}, [currentUser]);
+	}, [currentUser, isFirebaseAvailable]);
 	const handlePlayStateChange = (title, isPlaying) => {
 		if (isPlaying) {
 			playingCardsRef.current.add(title);

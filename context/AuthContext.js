@@ -11,29 +11,87 @@ export function useAuth() {
 
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
+  const [isFirebaseAvailable, setIsFirebaseAvailable] = useState(false);
 
-  const googleSignIn = ()=>{
-    const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider);
+  // Check if Firebase is properly configured
+  useEffect(() => {
+    const apiKey = process.env.NEXT_PUBLIC_API_KEY;
+    const hasValidConfig = apiKey && apiKey !== "your-firebase-api-key" && apiKey !== "placeholder-api-key";
+    setIsFirebaseAvailable(hasValidConfig && auth !== null);
+  }, []);
+
+  const googleSignIn = async () => {
+    if (!isFirebaseAvailable || !auth) {
+      console.warn('Firebase not configured. Please add your Firebase credentials to .env.local');
+      alert('Authentication not configured. Please check the console for setup instructions.');
+      return Promise.reject('Firebase not configured');
+    }
+    
+    try {
+      const provider = new GoogleAuthProvider();
+      return await signInWithPopup(auth, provider);
+    } catch (error) {
+      console.error('Google sign-in error:', error);
+      throw error;
+    }
   }
   
-  const githubSignIn = ()=>{
-    const provider = new GithubAuthProvider();
-    signInWithPopup(auth, provider);
+  const githubSignIn = async () => {
+    if (!isFirebaseAvailable || !auth) {
+      console.warn('Firebase not configured. Please add your Firebase credentials to .env.local');
+      alert('Authentication not configured. Please check the console for setup instructions.');
+      return Promise.reject('Firebase not configured');
+    }
+    
+    try {
+      const provider = new GithubAuthProvider();
+      return await signInWithPopup(auth, provider);
+    } catch (error) {
+      console.error('GitHub sign-in error:', error);
+      throw error;
+    }
   }
 
   function logOut() {
-    signOut(auth);
+    if (!isFirebaseAvailable || !auth) {
+      console.warn('Firebase not configured');
+      return;
+    }
+    
+    try {
+      signOut(auth);
+    } catch (error) {
+      console.error('Sign-out error:', error);
+    }
   }
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user);
-    });
+    if (!isFirebaseAvailable || !auth) {
+      return;
+    }
 
-    return () => unsubscribe();
-  }, [currentUser]);
+    try {
+      const unsubscribe = onAuthStateChanged(auth, (user) => {
+        setCurrentUser(user);
+      });
 
+      return () => unsubscribe();
+    } catch (error) {
+      console.error('Auth state change error:', error);
+    }
+  }, [isFirebaseAvailable]);
 
-  return <AuthContext.Provider value={{currentUser, googleSignIn, githubSignIn, logOut}}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider 
+      value={{
+        currentUser, 
+        googleSignIn, 
+        githubSignIn, 
+        logOut, 
+        isFirebaseAvailable
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 }

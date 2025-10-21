@@ -6,6 +6,11 @@ import Cards from "../components/Cards";
 import Footer from "../components/Footer";
 import ThemeToggler from "../components/ThemeToggler";
 import SignInPrompt from "../components/SignInPrompt";
+import FullscreenVisualizer from "../components/FullscreenVisualizer";
+import VisualizationControls from "../components/VisualizationControls";
+import BackgroundVisualizer from "../components/BackgroundVisualizer";
+import VisualizationDemo from "../components/VisualizationDemo";
+import VisualizationGuide from "../components/VisualizationGuide";
 import { AuthProvider, useAuth } from "../context/AuthContext";
 
 const HomeContent = () => {
@@ -39,11 +44,31 @@ const HomeContent = () => {
 	};
 
 	return (
-		<div>
-			<Header />
-			<Cards />
-			<Footer />
+		<div className="relative">
+			{/* Background Visualizer */}
+			<BackgroundVisualizer />
+			
+			{/* Main Content */}
+			<div className="relative z-10">
+				<Header />
+				<Cards />
+				<VisualizationDemo />
+				<Footer />
+			</div>
+			
 			<ThemeToggler />
+			
+			{/* Visualization Controls - Fixed position */}
+			<div className="fixed top-4 right-4 z-40">
+				<VisualizationControls />
+			</div>
+			
+			{/* Fullscreen Visualizer */}
+			<FullscreenVisualizer />
+			
+			{/* Visualization Guide */}
+			<VisualizationGuide />
+			
 			{showSignInPrompt && <SignInPrompt onClose={handleCloseSignInPrompt} />}
 		</div>
 	);
@@ -55,7 +80,7 @@ const Home = () => {
 			<AuthProvider>
 			<Head>
 				{/* Required meta tags */}
-				<meta charset="UTF-8" />
+				<meta charSet="UTF-8" />
 				<meta httpEquiv="X-UA-Compatible" content="IE=edge" />
 				<meta
 					name="viewport"
