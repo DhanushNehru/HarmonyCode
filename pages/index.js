@@ -98,7 +98,7 @@ const Home = () => {
 				<meta property="og:type" content="website" />
 				<meta
 					property="og:url"
-					content="https://harmonycode.vercep.app"
+					content="https://harmonycode.vercel.app"
 				/>
 				<meta
 					property="og:description"

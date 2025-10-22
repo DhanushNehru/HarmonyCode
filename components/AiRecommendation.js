@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { useTransition, animated } from "@react-spring/web";
 import Card from "./Card";
@@ -70,16 +70,16 @@ const AiRecommendation = ({ data }) => {
     }
   }
 
-  const generationConfig = {
+  const generationConfig = useMemo(() => ({
     temperature: 1,
     topP: 0.95,
     topK: 64,
     maxOutputTokens: 8192,
     responseMimeType: "text/plain",
-  };
+  }), []);
 
   // Fallback recommendation function
-  const getFallbackRecommendation = (searchTerm) => {
+  const getFallbackRecommendation = useCallback((searchTerm) => {
     if (!searchTerm) {
       // Return a random selection of popular cards
       const popularCards = ['Chill', 'Rain', 'Forest', 'Piano', 'Campfire'];
@@ -91,7 +91,7 @@ const AiRecommendation = ({ data }) => {
       item.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
     return filtered.slice(0, 5);
-  };
+  }, [data]);
 
   const run = useCallback(async () => {
     try {
@@ -139,8 +139,7 @@ const AiRecommendation = ({ data }) => {
       const fallbackResults = getFallbackRecommendation(search);
       setRecommendation(fallbackResults);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [apiKey, model, search, data]);
+  }, [apiKey, model, search, data, generationConfig, getFallbackRecommendation]);
 
   useEffect(() => {
     // Only run initial recommendation if we have data

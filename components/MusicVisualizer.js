@@ -247,8 +247,7 @@ const MusicVisualizer = ({ className = '' }) => {
         cancelAnimationFrame(animationRef.current);
       }
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isVisualizationEnabled, visualizationType, intensity, audioData, theme]);
+  }, [animate, isVisualizationEnabled, visualizationType, intensity, audioData, theme]);
 
   if (!isVisualizationEnabled) return null;
 

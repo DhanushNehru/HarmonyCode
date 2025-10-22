@@ -111,8 +111,7 @@ const BackgroundVisualizer = ({ className = '' }) => {
         cancelAnimationFrame(animationRef.current);
       }
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isVisualizationEnabled, audioData, theme]);
+  }, [animate, isVisualizationEnabled]);
 
   if (!isVisualizationEnabled) return null;
 

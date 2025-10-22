@@ -63,7 +63,7 @@ const VisualizationControls = ({ className = '' }) => {
           hover:shadow-xl
         `}
       >
-        <BsGear className={`w-4 h-4 ${isExpanded ? 'animate-spin' : ''}`} />
+        <BsGear className={`w-4 h-4 transition-transform duration-200 ${isExpanded ? 'rotate-45' : ''}`} />
         <span className="text-sm font-medium">Visualizer</span>
       </motion.button>
 
