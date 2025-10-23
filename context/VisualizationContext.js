@@ -69,7 +69,10 @@ export const VisualizationProvider = ({ children }) => {
     const now = Date.now();
     const { lastBeat, threshold, minInterval } = beatDetectionRef.current;
     
-    if (bassAverage > threshold * 255 && now - lastBeat > minInterval) {
+    // Maximum value for Uint8Array audio data
+    const MAX_AUDIO_VALUE = 255;
+    
+    if (bassAverage > threshold * MAX_AUDIO_VALUE && now - lastBeat > minInterval) {
       beatDetectionRef.current.lastBeat = now;
       return true;
     }
@@ -88,7 +91,8 @@ export const VisualizationProvider = ({ children }) => {
     analyserRef.current.getByteTimeDomainData(timeDomainData);
 
     // Calculate volume
-    const volume = frequencyData.reduce((sum, value) => sum + value, 0) / frequencyData.length / 255;
+    const MAX_AUDIO_VALUE = 255;
+    const volume = frequencyData.reduce((sum, value) => sum + value, 0) / frequencyData.length / MAX_AUDIO_VALUE;
     
     // Detect beat
     const beat = detectBeat(frequencyData);

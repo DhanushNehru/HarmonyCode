@@ -5,7 +5,7 @@ import { useVisualization } from '../context/VisualizationContext.js';
 import { COLOR_PALETTE } from '../constants/colors.js';
 import MusicVisualizer from './MusicVisualizer.js';
 
-import { Slider } from '@mui/material';
+import Slider from '@mui/material/Slider';
 
 const Card = ({ 
   title, 

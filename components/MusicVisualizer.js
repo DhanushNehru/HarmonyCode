@@ -96,9 +96,10 @@ const MusicVisualizer = ({ className = '' }) => {
 
     const barCount = Math.min(frequencyData.length / 2, 64);
     const barWidth = width / barCount;
+    const MAX_AUDIO_VALUE = 255;
 
     for (let i = 0; i < barCount; i++) {
-      const barHeight = (frequencyData[i] / 255) * height * intensity;
+      const barHeight = (frequencyData[i] / MAX_AUDIO_VALUE) * height * intensity;
       const x = i * barWidth;
       const y = height - barHeight;
 
@@ -141,10 +142,11 @@ const MusicVisualizer = ({ className = '' }) => {
     // Frequency bars in circle
     const barCount = Math.min(frequencyData.length / 4, 64);
     const angleStep = (2 * Math.PI) / barCount;
+    const MAX_AUDIO_VALUE = 255;
 
     for (let i = 0; i < barCount; i++) {
       const angle = i * angleStep;
-      const barHeight = (frequencyData[i] / 255) * radius * intensity;
+      const barHeight = (frequencyData[i] / MAX_AUDIO_VALUE) * radius * intensity;
       
       const x1 = centerX + Math.cos(angle) * radius;
       const y1 = centerY + Math.sin(angle) * radius;
@@ -178,11 +180,12 @@ const MusicVisualizer = ({ className = '' }) => {
 
     // Create particles based on frequency data
     const particleCount = Math.floor(volume * 50 * intensity);
+    const MAX_AUDIO_VALUE = 255;
     
     for (let i = 0; i < particleCount; i++) {
       const x = Math.random() * width;
       const y = Math.random() * height;
-      const size = (frequencyData[i % frequencyData.length] / 255) * 10 * intensity;
+      const size = (frequencyData[i % frequencyData.length] / MAX_AUDIO_VALUE) * 10 * intensity;
       
       ctx.beginPath();
       ctx.arc(x, y, size, 0, 2 * Math.PI);

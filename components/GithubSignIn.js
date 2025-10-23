@@ -33,6 +33,7 @@ const GithubSignIn = () => {
         width={24}
         height={24}
         alt='github logo'
+        unoptimized={true}
       />
       <span>Login with Github</span>
     </button>

@@ -33,6 +33,7 @@ const GoogleSignIn = () => {
           width={24}
           height={24}
           alt="google logo"
+          unoptimized={true}
         />
         <span>Login with Google</span>
       </button>

@@ -1,0 +1,29 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/next"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ],
+  "env": {
+    "NEXT_PUBLIC_API_KEY": "@next_public_api_key",
+    "NEXT_PUBLIC_AUTH_DOMAIN": "@next_public_auth_domain",
+    "NEXT_PUBLIC_PROJECT_ID": "@next_public_project_id",
+    "NEXT_PUBLIC_STORAGE_BUCKET": "@next_public_storage_bucket",
+    "NEXT_PUBLIC_MESSAGING_SENDER_ID": "@next_public_messaging_sender_id",
+    "NEXT_PUBLIC_APP_ID": "@next_public_app_id",
+    "NEXT_PUBLIC_GEMINI_API_KEY": "@next_public_gemini_api_key"
+  },
+  "functions": {
+    "pages/api/**/*.js": {
+      "maxDuration": 30
+    }
+  }
+}

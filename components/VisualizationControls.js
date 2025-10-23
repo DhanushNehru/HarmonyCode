@@ -12,7 +12,7 @@ import {
   BsFullscreenExit,
   BsGear
 } from 'react-icons/bs';
-import { Slider } from '@mui/material';
+import Slider from '@mui/material/Slider';
 
 const VisualizationControls = ({ className = '' }) => {
   const {
