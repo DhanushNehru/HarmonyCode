@@ -14,7 +14,7 @@ const ThemeToggler = () => {
 		else {
 			document.body.style.backgroundColor = "whitesmoke";
 		}
-	}, []);
+	}, [theme]);
 
 	const toggleTheme = () => {
 		if(theme === 'dark') {

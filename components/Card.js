@@ -1,21 +1,33 @@
 import { useState, useRef, useEffect } from 'react';
 
 import { useAuth } from '../context/AuthContext.js';
+import { useVisualization } from '../context/VisualizationContext.js';
 import { COLOR_PALETTE } from '../constants/colors.js';
+import MusicVisualizer from './MusicVisualizer.js';
 
-import { Slider } from '@mui/material';
+import Slider from '@mui/material/Slider';
 
-const Card = ({ title, Icon, onPlayStateChange,singleMode, playingCard, handlePlay, isPlayingGlobal }) => {
+const Card = ({ 
+  title, 
+  Icon, 
+  onPlayStateChange = () => {}, 
+  singleMode = false, 
+  playingCard = null, 
+  handlePlay = () => {}, 
+  isPlayingGlobal = false 
+}) => {
   const [volume, setVolume] = useState(1);
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
-  const { currentUser, googleSignIn } = useAuth();
+  const { currentUser, googleSignIn, isFirebaseAvailable } = useAuth();
+  const { startVisualization, stopVisualization, isVisualizationEnabled } = useVisualization();
   useEffect(() => {
     const handleStopAll = () => {
       if (isPlaying && audioRef.current) {
         audioRef.current.pause();
         setIsPlaying(false);
         onPlayStateChange(false);
+        stopVisualization();
       }
     };
 
@@ -24,18 +36,22 @@ const Card = ({ title, Icon, onPlayStateChange,singleMode, playingCard, handlePl
     return () => {
       window.removeEventListener('stopAllSounds', handleStopAll);
     };
-  }, [isPlaying, onPlayStateChange]);
+  }, [isPlaying, onPlayStateChange, stopVisualization]);
 
   // useEffect() for single mode
   useEffect(() => {
     if (singleMode) {
       if (playingCard === title) {
         audioRef.current.play();
+        if (isVisualizationEnabled) {
+          startVisualization(audioRef.current);
+        }
       } else {
         audioRef.current.pause();
+        stopVisualization();
       }
     }
-  }, [playingCard, singleMode]);
+  }, [playingCard, singleMode, isVisualizationEnabled, startVisualization, stopVisualization, title]);
 
   // function to generate random color
   const getRandomColor = () => {
@@ -57,18 +73,31 @@ const Card = ({ title, Icon, onPlayStateChange,singleMode, playingCard, handlePl
   };
 
   const checkAuth = () => {
+    // If user is already signed in, allow access
     if (currentUser) {
       return true;
     }
+    
+    if (!isFirebaseAvailable) {
+      // If Firebase is not configured, allow access without authentication
+      console.log('Firebase not configured - allowing access without authentication');
+      return true;
+    }
 
+    // If Firebase is available but user not signed in, try to sign in
     try {
       googleSignIn().then(() => {
         return true;
+      }).catch((error) => {
+        console.log('Sign-in failed:', error);
+        return false;
       });
     } catch (error) {
-      console.log(error);
+      console.log('Authentication error:', error);
       return false;
     }
+    
+    return false;
   };
 
   const changeVolume = (event) => {
@@ -80,18 +109,24 @@ const Card = ({ title, Icon, onPlayStateChange,singleMode, playingCard, handlePl
     if (checkAuth()) {
       if (singleMode) {
         if (playingCard === title) {
-
           handlePlay(null);
+          stopVisualization();
         } else {
           handlePlay(title);
+          if (audioRef.current && isVisualizationEnabled) {
+            startVisualization(audioRef.current);
+          }
         }
-
       }
       else{
         if (!isPlaying) {
           audioRef.current.play();
+          if (isVisualizationEnabled) {
+            startVisualization(audioRef.current);
+          }
         } else {
           audioRef.current.pause();
+          stopVisualization();
         }
 
         setIsPlaying(!isPlaying);
@@ -150,15 +185,25 @@ const Card = ({ title, Icon, onPlayStateChange,singleMode, playingCard, handlePl
         />
       </div>
 
-      {isPlaying || isPlayingGlobal  && (
-        <div className="absolute bottom-0 left-0 right-0 bg-[whitesmoke] rounded-b-2xl flex items-center justify-center p-2 dark:bg-[#1a1a1a]">
-          <Slider
-            aria-label="Volume"
-            value={volume * 100}
-            onChange={changeVolume}
-            className="m-auto"
-            style={{ width: '75%' }}
-          />
+      {(isPlaying || isPlayingGlobal) && (
+        <div className="absolute bottom-0 left-0 right-0 bg-[whitesmoke] rounded-b-2xl dark:bg-[#1a1a1a]">
+          {/* Mini visualizer */}
+          {isVisualizationEnabled && (
+            <div className="h-8 mb-2 mx-2 mt-2 rounded overflow-hidden">
+              <MusicVisualizer className="w-full h-full" />
+            </div>
+          )}
+          
+          {/* Volume control */}
+          <div className="flex items-center justify-center p-2">
+            <Slider
+              aria-label="Volume"
+              value={volume * 100}
+              onChange={changeVolume}
+              className="m-auto"
+              style={{ width: '75%' }}
+            />
+          </div>
         </div>
       )}
 

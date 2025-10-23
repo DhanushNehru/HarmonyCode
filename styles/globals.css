@@ -5,3 +5,51 @@
 body {
 	background-color: whitesmoke;
 }
+
+/* Visualization System Styles */
+.visualization-canvas {
+	image-rendering: -webkit-optimize-contrast;
+	image-rendering: -moz-crisp-edges;
+	image-rendering: pixelated;
+}
+
+/* Performance optimizations for mobile */
+@media (max-width: 768px) {
+	.visualization-canvas {
+		will-change: transform;
+		transform: translateZ(0);
+	}
+}
+
+/* Smooth transitions for visualization controls */
+.visualization-controls {
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Beat pulse animation */
+@keyframes beat-pulse {
+	0% { transform: scale(1); }
+	50% { transform: scale(1.05); }
+	100% { transform: scale(1); }
+}
+
+.beat-pulse {
+	animation: beat-pulse 0.3s ease-out;
+}
+
+/* Fullscreen visualizer optimizations */
+.fullscreen-visualizer {
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+	-webkit-perspective: 1000px;
+	perspective: 1000px;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+	.visualization-canvas,
+	.beat-pulse {
+		animation: none !important;
+		transition: none !important;
+	}
+}
